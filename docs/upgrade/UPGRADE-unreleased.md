@@ -33,6 +33,17 @@ There you can find links to upgrade notes for other versions too.
 ### Application
 - follow instructions in [the separate article](upgrade-instructions-for-read-model-for-product-lists.md) to introduce read model for frontend product lists into your project ([#1018](https://github.com/shopsys/shopsys/pull/1018))
     - we recommend to read [Introduction to Read Model](/docs/model/introduction-to-read-model.md) article
+- if you want to show availability of variants add these lines to `.table-variants` in `Product/detail.html.twig` [#771](https://github.com/shopsys/shopsys/pull/771)
+    ```
+        <th class="table-variants__cell">{{ 'Availability'|trans }}</th>
+    ```
+    ```
+       <td class="table-variants__cell">
+           {% if variant.calculatedAvailability %}
+               {{ variant.calculatedAvailability.name }}
+           {% endif %}
+       </td>
+    ```
 
 ### Configuration
 - update `phpstan.neon` with following change to skip phpstan error ([#1086](https://github.com/shopsys/shopsys/pull/1086))
