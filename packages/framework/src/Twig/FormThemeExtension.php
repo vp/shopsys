@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Shopsys\FrameworkBundle\Twig;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class FormThemeExtension extends \Twig_Extension
+class FormThemeExtension extends AbstractExtension
 {
     /** @access protected */
     const ADMIN_THEME = '@ShopsysFramework/Admin/Form/theme.html.twig';
@@ -33,7 +34,7 @@ class FormThemeExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction('getDefaultFormTheme', [$this, 'getDefaultFormTheme']),
+            new TwigFunction('getDefaultFormTheme', [$this, 'getDefaultFormTheme']),
         ];
     }
 

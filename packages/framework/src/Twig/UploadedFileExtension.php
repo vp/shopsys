@@ -5,10 +5,10 @@ namespace Shopsys\FrameworkBundle\Twig;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\UploadedFile\UploadedFileFacade;
 use Shopsys\FrameworkBundle\Twig\FileThumbnail\FileThumbnailExtension;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class UploadedFileExtension extends Twig_Extension
+class UploadedFileExtension extends AbstractExtension
 {
     /**
      * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
@@ -46,10 +46,10 @@ class UploadedFileExtension extends Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction('hasUploadedFile', [$this, 'hasUploadedFile']),
-            new Twig_SimpleFunction('uploadedFileUrl', [$this, 'getUploadedFileUrl']),
-            new Twig_SimpleFunction('uploadedFilePreview', [$this, 'getUploadedFilePreviewHtml'], ['is_safe' => ['html']]),
-            new Twig_SimpleFunction('getUploadedFile', [$this, 'getUploadedFileByEntity']),
+            new TwigFunction('hasUploadedFile', [$this, 'hasUploadedFile']),
+            new TwigFunction('uploadedFileUrl', [$this, 'getUploadedFileUrl']),
+            new TwigFunction('uploadedFilePreview', [$this, 'getUploadedFilePreviewHtml'], ['is_safe' => ['html']]),
+            new TwigFunction('getUploadedFile', [$this, 'getUploadedFileByEntity']),
         ];
     }
 

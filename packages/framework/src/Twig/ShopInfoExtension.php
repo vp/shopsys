@@ -4,9 +4,10 @@ namespace Shopsys\FrameworkBundle\Twig;
 
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class ShopInfoExtension extends \Twig_Extension
+class ShopInfoExtension extends AbstractExtension
 {
     /**
      * @var \Shopsys\FrameworkBundle\Model\ShopInfo\ShopInfoSettingFacade
@@ -36,9 +37,9 @@ class ShopInfoExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction('getShopInfoPhoneNumber', [$this, 'getPhoneNumber']),
-            new Twig_SimpleFunction('getShopInfoEmail', [$this, 'getEmail']),
-            new Twig_SimpleFunction('getShopInfoPhoneHours', [$this, 'getPhoneHours']),
+            new TwigFunction('getShopInfoPhoneNumber', [$this, 'getPhoneNumber']),
+            new TwigFunction('getShopInfoEmail', [$this, 'getEmail']),
+            new TwigFunction('getShopInfoPhoneHours', [$this, 'getPhoneHours']),
         ];
     }
 

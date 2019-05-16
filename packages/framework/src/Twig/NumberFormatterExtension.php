@@ -5,9 +5,10 @@ namespace Shopsys\FrameworkBundle\Twig;
 use CommerceGuys\Intl\Formatter\NumberFormatter;
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
-use Twig_Extension;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-class NumberFormatterExtension extends Twig_Extension
+class NumberFormatterExtension extends AbstractExtension
 {
     /** @access protected */
     const MINIMUM_FRACTION_DIGITS = 0;
@@ -37,20 +38,20 @@ class NumberFormatterExtension extends Twig_Extension
     }
 
     /**
-     * @return \Twig_SimpleFilter[]
+     * @return \Twig\TwigFilter[]
      */
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter(
+            new TwigFilter(
                 'formatNumber',
                 [$this, 'formatNumber']
             ),
-            new \Twig_SimpleFilter(
+            new TwigFilter(
                 'formatDecimalNumber',
                 [$this, 'formatDecimalNumber']
             ),
-            new \Twig_SimpleFilter(
+            new TwigFilter(
                 'formatPercent',
                 [$this, 'formatPercent']
             ),

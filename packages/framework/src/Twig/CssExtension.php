@@ -3,9 +3,10 @@
 namespace Shopsys\FrameworkBundle\Twig;
 
 use Shopsys\FrameworkBundle\Component\Css\CssFacade;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class CssExtension extends \Twig_Extension
+class CssExtension extends AbstractExtension
 {
     /**
      * @var \Shopsys\FrameworkBundle\Component\Css\CssFacade
@@ -26,7 +27,7 @@ class CssExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction('getCssVersion', [$this, 'getCssVersion']),
+            new TwigFunction('getCssVersion', [$this, 'getCssVersion']),
         ];
     }
 

@@ -2,10 +2,10 @@
 
 namespace Shopsys\FrameworkBundle\Twig;
 
-use Twig_Extension;
-use Twig_SimpleFilter;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-class CropZerosExtension extends Twig_Extension
+class CropZerosExtension extends AbstractExtension
 {
     /**
      * @return array
@@ -13,7 +13,7 @@ class CropZerosExtension extends Twig_Extension
     public function getFilters()
     {
         return [
-            new Twig_SimpleFilter('cropZeros', [$this, 'cropZeros']),
+            new TwigFilter('cropZeros', [$this, 'cropZeros']),
         ];
     }
 

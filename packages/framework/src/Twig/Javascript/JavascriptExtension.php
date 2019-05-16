@@ -3,10 +3,10 @@
 namespace Shopsys\FrameworkBundle\Twig\Javascript;
 
 use Shopsys\FrameworkBundle\Component\Utils\Utils;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class JavascriptExtension extends Twig_Extension
+class JavascriptExtension extends AbstractExtension
 {
     /**
      * @var \Shopsys\FrameworkBundle\Twig\Javascript\JavascriptCompiler
@@ -27,7 +27,7 @@ class JavascriptExtension extends Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction('importJavascripts', [$this, 'renderJavascripts'], ['is_safe' => ['html']]),
+            new TwigFunction('importJavascripts', [$this, 'renderJavascripts'], ['is_safe' => ['html']]),
         ];
     }
 

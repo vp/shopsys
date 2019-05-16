@@ -17,7 +17,7 @@ use Shopsys\FrameworkBundle\Twig\DateTimeFormatterExtension;
 use Shopsys\FrameworkBundle\Twig\PriceExtension;
 use Symfony\Component\Routing\RouterInterface;
 use Tests\ShopBundle\Test\FunctionalTestCase;
-use Twig_Environment;
+use Twig\Environment;
 
 class OrderMailTest extends FunctionalTestCase
 {
@@ -58,7 +58,7 @@ class OrderMailTest extends FunctionalTestCase
             ->getMock();
         $domainRouterFactoryMock->expects($this->any())->method('getRouter')->willReturn($routerMock);
 
-        $twigMock = $this->getMockBuilder(Twig_Environment::class)->disableOriginalConstructor()->getMock();
+        $twigMock = $this->getMockBuilder(Environment::class)->disableOriginalConstructor()->getMock();
         $orderItemPriceCalculationMock = $this->getMockBuilder(OrderItemPriceCalculation::class)->disableOriginalConstructor()->getMock();
         $settingMock = $this->getMockBuilder(Setting::class)->disableOriginalConstructor()->getMock();
         $priceExtensionMock = $this->getMockBuilder(PriceExtension::class)->disableOriginalConstructor()->getMock();

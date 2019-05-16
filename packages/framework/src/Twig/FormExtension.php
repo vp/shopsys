@@ -3,9 +3,10 @@
 namespace Shopsys\FrameworkBundle\Twig;
 
 use Symfony\Component\Form\FormError;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class FormExtension extends \Twig_Extension
+class FormExtension extends AbstractExtension
 {
     /**
      * @return array
@@ -13,7 +14,7 @@ class FormExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction('getFormErrorSourceId', [$this, 'getFormErrorSourceId']),
+            new TwigFunction('getFormErrorSourceId', [$this, 'getFormErrorSourceId']),
         ];
     }
 

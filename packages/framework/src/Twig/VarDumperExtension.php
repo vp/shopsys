@@ -2,10 +2,10 @@
 
 namespace Shopsys\FrameworkBundle\Twig;
 
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class VarDumperExtension extends Twig_Extension
+class VarDumperExtension extends AbstractExtension
 {
     /**
      * @return array
@@ -13,7 +13,7 @@ class VarDumperExtension extends Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'd',
                 [$this, 'd']
             ),

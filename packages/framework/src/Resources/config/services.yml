@@ -590,7 +590,7 @@ services:
             - '%kernel.debug%'
 
     twig.stringloader:
-        class: Twig_Loader_Array
+        class: \Twig\Loader\ArrayLoader
 
     Shopsys\FrameworkBundle\Component\Domain\Multidomain\Twig\FilesystemLoader: '@twig.loader.filesystem'
 
