@@ -442,7 +442,7 @@
 {%- endblock ckeditor_row %}
 
 {% block form_label %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% if label is not same as(false) %}
             {% if not compound %}
                 {% set label_attr = label_attr|merge({'for': id}) %}
@@ -466,7 +466,7 @@
                 {% endif %}
             </label>
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock form_label %}
 
 {% block checkbox_widget %}
@@ -485,10 +485,10 @@
 {% endblock checkbox_widget %}
 
 {% block checkbox_label %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% set isCheckbox = true %}
         {{ block('form_label') }}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock checkbox_label %}
 
 {% block product_row %}
@@ -658,7 +658,7 @@
 
 {% block form_errors %}
     {% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-line__error'))}) %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div class="form-error {{ errors|length > 0 ? '' : ' display-none' }}  js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ errors_attr.class }}">
             <span class="svg svg-circle-remove js-validation-error-toggle"></span>
             <div class="in-message in-message--error js-validation-error {{ form.parent is not empty ? ' in-message--pin' : '' }}">
@@ -674,7 +674,7 @@
                 <span class="in-message__close js-validation-error-close">x</span>
             </div>
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock form_errors %}
 
 {% block form_widget_simple %}
@@ -782,7 +782,7 @@
         <div class="form-line__side">
             <div class="form-line__item">
     {% endif %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-choice-list')|trim}) %}
         <div {{ block('widget_container_attributes') }}>
             {% for child in form %}
@@ -795,7 +795,7 @@
                 {{ empty_message }}
             {% endfor %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
     {% if isSimple|default(false) == false %}
             </div>
             {{- block('appendix_block') -}}
@@ -942,7 +942,7 @@
 {% endblock domain_widget %}
 
 {% block domains_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-choice-list')|trim}) %}
         <div {{ block('widget_container_attributes') }}>
             {% for domainId, child in form %}
@@ -958,7 +958,7 @@
                 </label>
             {% endfor %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock domains_widget %}
 
 {% block widget_attributes -%}
@@ -1035,10 +1035,10 @@
         <div class="form-line__side">
             <div class="form-line__item">
     {% endif %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% set attr = attr|merge({'class': ((attr.class|default('') ~ ' js-date-picker input')|trim)}) %}
         {{- block('form_widget') -}}
-    {% endspaceless %}
+    {% endapply %}
     {% if isSimple|default(false) == false %}
             </div>
         </div>
