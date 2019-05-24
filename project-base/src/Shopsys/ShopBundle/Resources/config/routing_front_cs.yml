@@ -35,7 +35,7 @@ front_order_sent:
     defaults: { _controller: ShopsysShopBundle:Front\Order:sent }
 
 front_product_search:
-    path: /hledani
+    path: /hledani/
     defaults: { _controller: ShopsysShopBundle:Front\Product:search }
 
 front_registration_register:

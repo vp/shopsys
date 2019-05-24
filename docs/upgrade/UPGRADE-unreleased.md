@@ -23,4 +23,9 @@ There you can find links to upgrade notes for other versions too.
 - we recommend upgrading PHPStan to level 4 [#1040](https://github.com/shopsys/shopsys/pull/1040)
     - you'll find detailed instructions in separate article [Upgrade Instructions for Upgrading PHPStan to Level 4](/docs/upgrade/phpstan-level-4.md)
 
+### Configuration
+- add trailing slash to all your localized paths for `front_product_search` route ([#1067](https://github.com/shopsys/shopsys/pull/1067))
+    - be aware, if you already have such paths (`hledani/`, `search/`) in your application
+    - the change might cause problems with your SEO as well
+
 [shopsys/framework]: https://github.com/shopsys/framework
