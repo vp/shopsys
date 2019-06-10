@@ -1,0 +1,20 @@
+nelmio_api_doc:
+    areas:
+        path_patterns:
+          - ^/api(?!/doc$)
+#    documentation:
+#        host: api.example.com
+#        schemes: [http, https]
+#        info:
+#            title: Shopsys Framework
+#            description: Backend API for connecting e-commerce platform with applications of 3rd parties
+#            version: 1.0.0
+#        securityDefinitions:
+#            oauth2:
+#                type: oauth2
+#                name: Authorization
+#                in: header
+#                flows:
+#                    clientCredentials:
+#                        tokenUrl: http://127.0.0.1:8000/api/token
+#                        scopes: {}

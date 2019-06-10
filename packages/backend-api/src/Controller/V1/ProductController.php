@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Shopsys\BackendApiBundle\Controller\V1;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcher;
@@ -13,6 +14,7 @@ use Shopsys\BackendApiBundle\Component\HeaderLinks\HeaderLinksTransformer;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductFacade;
 use Shopsys\FrameworkBundle\Model\Product\ProductQuery;
+use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -57,7 +59,20 @@ class ProductController extends AbstractFOSRestController
     /**
      * Retrieves an Product resource
      * @Get("/products/{uuid}")
-     * @param string $uuid
+     * @SWG\Get(
+     *     path="/api/v1/products/{uuid}",
+     *     @SWG\Parameter(
+     *         name="uuid",
+     *         in="path",
+     *         description="UUID of product",
+     *         required=true,
+     *         type="string",
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Product resource",
+     *     )
+     * )
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getProductAction(string $uuid): Response
@@ -76,6 +91,33 @@ class ProductController extends AbstractFOSRestController
      * @Get("/products")
      * @QueryParam(name="page", requirements="\d+", default=1)
      * @QueryParam(name="uuids", map=true, allowBlank=false)
+     * @Get("/products")
+     * @SWG\Get(
+     *     path="/api/v1/products",
+     *     @SWG\Parameter(
+     *         name="uuids",
+     *         in="query",
+     *         description="UUIDs of products",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="page",
+     *         in="query",
+     *         description="Page",
+     *         required=false,
+     *         type="integer",
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Products resources",
+     *         @SWG\Header(
+     *             header="Link",
+     *             description="All links to other product resources",
+     *             type="string",
+     *         )
+     *     )
+     * )
      * @param \FOS\RestBundle\Request\ParamFetcher $paramFetcher
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\Response

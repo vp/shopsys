@@ -45,13 +45,14 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
-            new Trikoder\Bundle\OAuth2Bundle\TrikoderOAuth2Bundle(),
+//            new Trikoder\Bundle\OAuth2Bundle\TrikoderOAuth2Bundle(),
             new VasekPurchart\ConsoleErrorsBundle\ConsoleErrorsBundle(),
             new FOS\CKEditorBundle\FOSCKEditorBundle(), // has to be loaded after FrameworkBundle and TwigBundle
             new Joschi127\DoctrineEntityOverrideBundle\Joschi127DoctrineEntityOverrideBundle(),
             new Shopsys\FrameworkBundle\ShopsysFrameworkBundle(),
             new Shopsys\ReadModelBundle\ShopsysReadModelBundle(), // has to be loaded after ShopsysFrameworkBundle because it overrides Twig `image` function
             new Shopsys\ShopBundle\ShopsysShopBundle(), // must be loaded as last, because translations must overwrite other bundles
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
         ];
 
         if ($this->getEnvironment() === EnvironmentType::DEVELOPMENT) {

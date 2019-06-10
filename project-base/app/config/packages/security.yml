@@ -41,9 +41,8 @@ security:
             security: false
         backend_api:
             pattern: ^/api
-            security: true
+            security: false
             stateless: true
-            oauth2: true
         frontend:
             pattern: ^/
             anonymous: ~
