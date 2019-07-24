@@ -1,0 +1,4 @@
+parameters:
+  shopsys.entity_extension.map:
+    Tests\FrameworkBundle\Unit\Component\PhpStormStubGenerator\Resources\Framework\Model\Availability\StubAvailability: Tests\FrameworkBundle\Unit\Component\PhpStormStubGenerator\Resources\Project\Model\Availability\StubAvailability
+    Tests\FrameworkBundle\Unit\Component\PhpStormStubGenerator\Resources\Framework\Model\Product\StubProduct: Tests\FrameworkBundle\Unit\Component\PhpStormStubGenerator\Resources\Project\Model\Product\StubProduct

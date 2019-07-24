@@ -1,0 +1,6 @@
+services:
+  Shopsys\ShopBundle\Form\Front\Order\DomainAwareOrderFlowFactory: ~
+
+  Tests\FrameworkBundle\Unit\Component\PhpStormStubGenerator\Resources\Framework\Model\Product\StubProductDataFactoryInterface: '@Tests\FrameworkBundle\Unit\Component\PhpStormStubGenerator\Resources\Project\Model\Product\StubProductDataFactory'
+
+  Tests\FrameworkBundle\Unit\Component\PhpStormStubGenerator\Resources\Framework\Model\Availability\StubAvailabilityChecker: '@Tests\FrameworkBundle\Unit\Component\PhpStormStubGenerator\Resources\Project\Model\Availability\StubAvailabilityChecker'

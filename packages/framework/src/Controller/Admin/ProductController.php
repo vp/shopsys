@@ -156,7 +156,10 @@ class ProductController extends AdminBaseController
      */
     public function editAction(Request $request, $id)
     {
+        $this->productDataFactory->test()->extId;
+        $this->productDataFactory->create()->x();
         $product = $this->productFacade->getById($id);
+        $product->testProduct();
         $productData = $this->productDataFactory->createFromProduct($product);
 
         $form = $this->createForm(ProductFormType::class, $productData, ['product' => $product]);
