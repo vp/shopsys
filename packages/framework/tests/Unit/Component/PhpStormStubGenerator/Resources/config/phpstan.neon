@@ -1,0 +1,16 @@
+parameters:
+  excludes_analyse:
+    - %currentWorkingDirectory%/packages/framework/tests/Unit/Component/PhpStormStubGenerator/Resources/expected.php
+  ignoreErrors:
+    -
+      message: '#Method .* should return .* but returns .*#'
+      path: %currentWorkingDirectory%/packages/framework/tests/Unit/Component/PhpStormStubGenerator/Resources/*Factory*
+services:
+  -
+    class: Tests\FrameworkBundle\Unit\Component\PhpStormStubGenerator\PHPStan\StubProductDataFactoryExtension
+    tags:
+      - phpstan.broker.dynamicMethodReturnTypeExtension
+  -
+    class: Tests\FrameworkBundle\Unit\Component\PhpStormStubGenerator\PHPStan\StubProductFacadeExtension
+    tags:
+      - phpstan.broker.dynamicMethodReturnTypeExtension
