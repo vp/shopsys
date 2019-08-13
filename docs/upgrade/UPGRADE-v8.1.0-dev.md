@@ -44,4 +44,10 @@ There you can find links to upgrade notes for other versions too.
               $debugNote = 'Order page should redirect by 302 as the cart is empty by default.';
               $config->changeDefaultRequestDataSet($debugNote)
         ```
+
+## [shopsys/coding-standards]
+- apply fixers for compliance with [PSR-12](https://www.php-fig.org/psr/psr-12/) ([#1324](https://github.com/shopsys/shopsys/pull/1324))
+    - execute `php phing standards-fix` to fix the standards automatically
+
+[shopsys/coding-standards]: https://github.com/shopsys/coding-standards
 [shopsys/framework]: https://github.com/shopsys/framework
