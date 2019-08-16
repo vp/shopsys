@@ -147,7 +147,10 @@ class SideMenuBuilder
         $menu->addChild('pricing_groups', ['route' => 'admin_pricinggroup_list', 'label' => t('Pricing groups')]);
         $menu->addChild('vat', ['route' => 'admin_vat_list', 'label' => t('VAT and rounding')]);
         $menu->addChild('free_transport_and_payment', ['route' => 'admin_transportandpayment_freetransportandpaymentlimit', 'label' => t('Free shipping and payment')]);
-        $menu->addChild('currencies', ['route' => 'admin_currency_list', 'label' => t('Currencies')]);
+        if ($this->authorizationChecker->isGranted(Roles::ROLE_SUPER_ADMIN)) {
+            $currenciesMenuItem = $menu->addChild('currencies', ['route' => 'admin_currency_list', 'label' => t('Currencies')]);
+            $currenciesMenuItem->setExtra('superadmin', true);
+        }
         $menu->addChild('promo_codes', ['route' => 'admin_promocode_list', 'label' => t('Promo codes')]);
 
         $this->dispatchConfigureMenuEvent(ConfigureMenuEvent::SIDE_MENU_PRICING, $menu);
