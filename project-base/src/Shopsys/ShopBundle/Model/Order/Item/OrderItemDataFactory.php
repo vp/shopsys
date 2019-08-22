@@ -28,6 +28,8 @@ class OrderItemDataFactory extends BaseOrderItemDataFactory
         $this->fillFromOrderItem($orderItemData, $orderItem);
         $this->addFieldsByOrderItemType($orderItemData, $orderItem);
 
+        $orderItemData->randomColumn = $orderItem->getRandomColumn();
+
         return $orderItemData;
     }
 }
