@@ -526,6 +526,12 @@ msgstr "Vytvořeno administrátorem"
 msgid "Created on"
 msgstr "Vytvořeno dne"
 
+msgid "Cron overview"
+msgstr "Přehled cronů"
+
+msgid "Cron with serviceID `%serviceId%` was scheduled"
+msgstr "Cron s serviceId `%serviceId%` byl naplánován"
+
 msgid "Cropping"
 msgstr "Ořezávání"
 
@@ -901,6 +907,9 @@ msgstr "Zadává se ve dnech. Nula reprezentuje zboží skladem, nevyplněné zn
 msgid "Entry price type"
 msgstr "Typ vstupní ceny"
 
+msgid "Error"
+msgstr "Error"
+
 msgid "Error messages"
 msgstr "Chybové hlášky"
 
@@ -912,6 +921,21 @@ msgstr "Při nahrávání souboru došlo k chybě: %message%"
 
 msgid "Error occurred, try again please."
 msgstr "Nastala chyba, zkuste to, prosím, znovu."
+
+msgid "Every 5 minutes"
+msgstr "Každých 5 minut"
+
+msgid "Every 5 minutes in %hour% hour"
+msgstr "Každých 5 minut v %hour% hodinu"
+
+msgid "Every hour"
+msgstr "Každou hodinu"
+
+msgid "Every hour and %minutes% minutes"
+msgstr "Každou hodinu a %minutes% minut"
+
+msgid "Everyday at %hour%:%minutes%"
+msgstr "Každý den v %hour%:%minutes%"
 
 msgid "Exchange rate"
 msgstr "Kurz"
@@ -1014,6 +1038,9 @@ msgstr "Doprava a platba zdarma"
 
 msgid "Free shipping and payment settings saved"
 msgstr "Nastavení dopravy a platby zdarma bylo uloženo"
+
+msgid "Frequency"
+msgstr "Frekvence"
 
 msgid "Frontend"
 msgstr "Frontend"
@@ -1150,6 +1177,12 @@ msgstr "Jazyk"
 msgid "Last action time"
 msgstr "Čas poslední akce"
 
+msgid "Last duration (sec)"
+msgstr "Poslední doba trvání (sec)"
+
+msgid "Last finished at"
+msgstr "Poslední dokončení"
+
 msgid "Last login"
 msgstr "Poslední přihlášení"
 
@@ -1158,6 +1191,9 @@ msgstr "Příjmení"
 
 msgid "Last order"
 msgstr "Poslední objednávka"
+
+msgid "Last started at"
+msgstr "Poslední spuštění"
 
 msgid "Legal conditions"
 msgstr "Právní podmínky"
@@ -1363,6 +1399,9 @@ msgstr "Nebyly nalezeny žádné kategorie. Nejprve musíte nějaké vytvořit."
 msgid "No countries found. You have to create some first."
 msgstr "Nebyly nalezeny žádné státy. Nejprve musíte nějaké vytvořit."
 
+msgid "No crons found."
+msgstr "Žádné crony nenalezeny"
+
 msgid "No currencies found. You have to create some first."
 msgstr "Nebyly nalezeny žádné měny. Nejprve musíte nějakou vytvořit."
 
@@ -1440,6 +1479,9 @@ msgstr "Výskyt"
 
 msgid "Oh, you just tried to log in using default credentials. We do not allow that on production environment. If you are random hacker, please go somewhere else. If you are authorized user, please use another account or contact developers and change password during deployment."
 msgstr "Pokusili jste se přihlásit výchozími přihlašovacími údaji. V produkčním prostředí toto není dovoleno. Pokud jste hacker, běžte prosím jinam. Pokud jste oprávněný uživatel, použijte jiný účet nebo kontaktujte vývojáře, aby vám změnili heslo."
+
+msgid "Ok"
+msgstr "Ok"
 
 msgid "Only checked products"
 msgstr "Pouze zaškrtnuté zboží"
@@ -1759,6 +1801,9 @@ msgstr "Zaokrouhlení"
 msgid "Rounding item with 0 % VAT will be added to your order. It is used for payment in cash."
 msgstr "Do objednávky bude přidána zaokrouhlovací položka s 0% DPH. Používá se pro platbu v hotovosti."
 
+msgid "Running"
+msgstr "Běží"
+
 msgid "SEO"
 msgstr "SEO"
 
@@ -1785,6 +1830,12 @@ msgstr "Uložit změny ve všech šablonách"
 
 msgid "Save changes in order"
 msgstr "Uložit změny v pořadí"
+
+msgid "Schedule"
+msgstr "Naplánovat"
+
+msgid "Scheduled"
+msgstr "Naplánován"
 
 msgid "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
 msgstr "Byl vytvořen skript <a href=\"{{ url }}\"><strong>{{ name }}</strong></a>"
@@ -1938,6 +1989,9 @@ msgstr "Nastavení"
 
 msgid "Settings modified."
 msgstr "Nastavení bylo upraveno."
+
+msgid "Several times a day (%hours%h and %minutes%m)"
+msgstr "Několikrát denně (%hours%h a %minutes%m)"
 
 msgid "Shipping"
 msgstr "Doprava"

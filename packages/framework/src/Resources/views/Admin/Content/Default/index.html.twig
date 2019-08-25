@@ -8,7 +8,7 @@
         <i class="svg svg-arrow"></i>
         <span class="box-overview__item__percent__value" data-counter="counterup" data-value="{{ percent|abs }}">0</span>%
     </div>
-    
+
     <div class="box-overview__item__number" data-counter="counterup" data-value="{{ number }}">
         0
     </div>
@@ -69,4 +69,10 @@
             ></canvas>
         </div>
     </div>
+
+    {% if cronGridView is not null %}
+        <div class="wrap-bar"></div>
+        <h2>{{ 'Cron overview'|trans }}</h2>
+        {{ cronGridView.render() }}
+    {% endif %}
 {% endblock %}
