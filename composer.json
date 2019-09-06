@@ -149,7 +149,8 @@
         "twig/twig": "^2.4.8",
         "vasek-purchart/console-errors-bundle": "^1.0.1",
         "webmozart/assert": "^1.4",
-        "trikoder/oauth2-bundle": "^1.1"
+        "trikoder/oauth2-bundle": "^1.1",
+        "overblog/graphql-bundle": "^0.12.2"
     },
     "require-dev": {
         "ext-pgsql": "*",
@@ -162,7 +163,8 @@
         "shopsys/monorepo-builder": "^5.5.0",
         "phpstan/phpstan-doctrine": "^0.11.2",
         "phpstan/phpstan-phpunit": "^0.11.2",
-        "sspooky13/yaml-standards": "^4.2.5"
+        "sspooky13/yaml-standards": "^4.2.5",
+        "overblog/graphiql-bundle": "^0.1.2"
     },
     "conflict": {
         "symfony/dependency-injection": "3.4.15|3.4.16",

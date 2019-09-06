@@ -7,3 +7,7 @@ shopsys_framework:
 
 elfinder:
     resource: "@FMElfinderBundle/Resources/config/routing.yml"
+
+overblog_graphql_single_endpoint:
+    resource: "@OverblogGraphQLBundle/Resources/config/routing/single.yaml"
+    prefix: /graphql

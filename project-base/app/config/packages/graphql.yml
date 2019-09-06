@@ -1,0 +1,14 @@
+overblog_graphql:
+    # @see https://github.com/overblog/GraphQLBundle/blob/master/docs/security/handle-cors.md if needed
+    #    security:
+    #        handle_cors: true
+    definitions:
+        show_debug_info: false
+        schema:
+            query: Query
+        mappings:
+            auto_discover: false
+            types:
+                -   type: yaml
+                    dir: "%shopsys.resources_dir%/config/graphql/types"
+                    suffix: ~
