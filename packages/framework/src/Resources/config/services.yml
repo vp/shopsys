@@ -1011,3 +1011,13 @@ services:
     Shopsys\FrameworkBundle\Component\ClassExtension\AnnotationsAdder: ~
 
     Shopsys\FrameworkBundle\Component\ClassExtension\FileContentsReplacer: ~
+
+    product.resolver:
+        class: Shopsys\FrameworkBundle\Model\Product\Resolver\ProductResolver
+        tags:
+            - { name: overblog_graphql.resolver }
+
+    Shopsys\FrameworkBundle\FrontendModel\IdFromGlobalIdExpressionFunction:
+        public: false
+        tags:
+            - { name: overblog_graphql.expression_function }
