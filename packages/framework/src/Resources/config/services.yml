@@ -1016,6 +1016,10 @@ services:
         class: Shopsys\FrameworkBundle\Model\Product\Resolver\ProductResolver
         tags:
             - { name: overblog_graphql.resolver }
+    price.resolver:
+        class: Shopsys\FrameworkBundle\Model\Product\Resolver\PriceResolver
+        tags:
+            - { name: overblog_graphql.resolver }
 
     Shopsys\FrameworkBundle\FrontendModel\IdFromGlobalIdExpressionFunction:
         public: false

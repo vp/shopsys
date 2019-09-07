@@ -15,3 +15,7 @@ Product:
             ean:
                 type: "String"
                 description: "Product EAN code"
+            price:
+                type: "Price"
+                description: "Product price"
+                resolve: "@=service('price.resolver').resolveByProduct(value)"
