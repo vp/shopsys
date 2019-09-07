@@ -1025,3 +1025,8 @@ services:
         public: false
         tags:
             - { name: overblog_graphql.expression_function }
+
+    product.mutation.create:
+        class: Shopsys\FrameworkBundle\Model\Product\Mutation\ProductMutation
+        tags:
+            - { name: overblog_graphql.mutation}
