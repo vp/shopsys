@@ -9,6 +9,9 @@
     <property name="path.framework" value="${path.packages}/framework"/>
     <property name="path.utils" value="${project.basedir}/utils"/>
     <property name="translations.dump.flags" value=""/>
+    <property name="path.storefront" value="${project.basedir}/storefront"/>
+
+    <property name="yaml-standards.args" value="--exclude-dir=${project.basedir}/storefront"/>
 
     <import file="${path.framework}/build.xml"/>
     <import file="${path.backend-api}/build.xml"/>
@@ -27,7 +30,7 @@
 
     <target name="build-demo-ci" depends="backend-api-install,composer-dev,backend-api-oauth-keys-generate,shopsys_framework.build-demo-ci,backend-api-uninstall" description="Builds application for development with clean demo DB and runs CI checks."/>
 
-    <target name="build-demo-dev" depends="backend-api-install,composer-dev,backend-api-oauth-keys-generate,shopsys_framework.build-demo-dev,backend-api-uninstall" description="Builds application for development with clean demo DB and runs checks on changed files."/>
+    <target name="build-demo-dev" depends="backend-api-install,composer-dev,storefront-install,backend-api-oauth-keys-generate,shopsys_framework.build-demo-dev,backend-api-uninstall,storefront-build" description="Builds application for development with clean demo DB and runs checks on changed files."/>
 
     <target name="build-demo-dev-no-api" depends="shopsys_framework.build-demo-dev" description="Builds application for development with clean demo DB without API and runs checks on changed files."/>
 
@@ -247,6 +250,18 @@
     <target name="standards-fix" depends="shopsys_framework.standards-fix,phing-config-fix" description="Automatically fixes *some* coding standards violations in all files. Always run 'standards' to be sure there are no further violations."/>
 
     <target name="standards-fix-diff" depends="shopsys_framework.standards-fix-diff,phing-config-fix" description="Automatically fixes *some* coding standards violations in changed files. Always run 'standards' to be sure there are no further violations."/>
+
+    <target name="storefront-build">
+        <exec executable="yarn" dir="${path.storefront}" passthru="true" checkreturn="true">
+            <arg value="build"/>
+        </exec>
+    </target>
+
+    <target name="storefront-install">
+        <exec executable="yarn" dir="${path.storefront}" logoutput="true" passthru="true" checkreturn="true">
+            <arg value="install"/>
+        </exec>
+    </target>
 
     <target name="tests-unit" description="Runs unit tests in the whole monorepo.">
         <phingcall target="shopsys_framework.tests-unit"/>
