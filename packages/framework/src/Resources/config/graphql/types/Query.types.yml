@@ -1,0 +1,19 @@
+QueryDecorator:
+    type: object
+    decorator: true
+    config:
+        fields:
+            product:
+                type: 'Product'
+                args:
+                    id:
+                        description: 'Resolves product using its id.'
+                        type: 'ID!'
+                resolve: "@=resolver('Product', [idFromGlobalId(args['id'])])"
+            products:
+                type: '[Product!]!'
+                args:
+                    categoryId:
+                        description: 'Resolves products using category'
+                        type: 'Int!'
+                resolve: "@=service('product.resolver').resolveByCategoryId(args['categoryId'])"

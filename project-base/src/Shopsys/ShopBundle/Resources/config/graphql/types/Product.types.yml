@@ -1,21 +1,10 @@
 Product:
     type: object
+    inherits:
+        - 'ProductDecorator'
     config:
-        description: "Represents a product"
+        description: "Represents your product"
         fields:
-            id:
-                type: "ID!"
-                description: "Internal identifier"
-            name:
-                type: "String"
-                description: "Localized product name (domain dependent)"
-            partno:
-                type: "String"
-                description: "Product Part Number"
-            ean:
-                type: "String"
-                description: "Product EAN code"
-            price:
-                type: "Price"
-                description: "Product price"
-                resolve: "@=service('price.resolver').resolveByProduct(value)"
+            catnum:
+                type: String
+                description: Catalog number

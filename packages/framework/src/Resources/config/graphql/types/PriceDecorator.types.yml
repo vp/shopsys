@@ -1,0 +1,21 @@
+PriceDecorator:
+    type: object
+    decorator: true
+    config:
+        description: "Represents the price of the product"
+        fields:
+            id:
+                type: "ID!"
+                description: "Internal identifier"
+            price_with_vat:
+                type: "Money"
+                description: "Price with VAT"
+            price_without_vat:
+                type: "Money"
+                description: "Price without VAT"
+            vat_amount:
+                type: "Money"
+                description: "How much is going to build the new highway"
+            is_price_from:
+                type: "Boolean!"
+                description: "Determines whether it's a final price or starting price"

@@ -11,5 +11,8 @@ overblog_graphql:
             auto_discover: false
             types:
                 -   type: yaml
+                    dir: "%shopsys.framework.root_dir%/src/Resources/config/graphql/types"
+                    suffix: ~
+                -   type: yaml
                     dir: "%shopsys.resources_dir%/config/graphql/types"
                     suffix: ~

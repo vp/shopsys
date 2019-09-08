@@ -1,0 +1,11 @@
+ProductInputDecorator:
+    type: input-object
+    decorator: true
+    config:
+        fields:
+            name:
+                type: "String!"
+            ean:
+                type: "String!"
+            price_without_vat:
+                type: "Money!"

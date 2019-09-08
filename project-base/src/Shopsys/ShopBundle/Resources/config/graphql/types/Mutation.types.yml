@@ -1,10 +1,4 @@
 Mutation:
     type: object
-    config:
-        fields:
-            Product:
-                type: Product!
-                resolve: "@=mutation('create_product', [args])"
-                args:
-                    input:
-                        type: ProductInput!
+    inherits:
+        - 'MutationDecorator'

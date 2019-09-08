@@ -1,10 +1,4 @@
 ProductInput:
     type: input-object
-    config:
-        fields:
-            name:
-                type: "String!"
-            ean:
-                type: "String!"
-            price_without_vat:
-                type: "Money!"
+    inherits:
+        - 'ProductInputDecorator'
