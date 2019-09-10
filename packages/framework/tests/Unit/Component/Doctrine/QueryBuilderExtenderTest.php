@@ -32,7 +32,13 @@ class QueryBuilderExtenderTest extends TestCase
         $this->assertCount(1, reset($joinDqlPart));
     }
 
-    public function testExtendBaseEntityJoinWithExtendedEntity(): void
+    /**
+     * @dataProvider extendJoinWithExtendedEntityProvider
+     * @param string $firstJoinedEntity
+     * @param string $secondJoinedEntity
+     * @param array $extensionMap
+     */
+    public function testExtendJoinWithExtendedEntity(string $firstJoinedEntity, string $secondJoinedEntity, array $extensionMap): void
     {
         /** @var \Doctrine\ORM\EntityManager $entityManager */
         $entityManager = $this->getMockBuilder(EntityManagerInterface::class)
@@ -40,35 +46,33 @@ class QueryBuilderExtenderTest extends TestCase
             ->getMockForAbstractClass();
         $queryBuilder = new QueryBuilder($entityManager);
 
-        $extensionMap = [BaseProduct::class => Product::class];
-
         $entityNameResolver = new EntityNameResolver($extensionMap);
         $queryBuilderExtender = new QueryBuilderExtender($entityNameResolver);
         $queryBuilder->from(Category::class, 'c');
-        $queryBuilderExtender->addOrExtendJoin($queryBuilder, BaseProduct::class, 'p', '1 = 1');
-        $queryBuilderExtender->addOrExtendJoin($queryBuilder, Product::class, 'p', '0 = 0');
+        $queryBuilderExtender->addOrExtendJoin($queryBuilder, $firstJoinedEntity, 'p', '1 = 1');
+        $queryBuilderExtender->addOrExtendJoin($queryBuilder, $secondJoinedEntity, 'p', '0 = 0');
 
         $joinDqlPart = $queryBuilder->getDQLPart('join');
         $this->assertCount(1, reset($joinDqlPart));
     }
 
-    public function testExtendExtendedEntityJoinWithBaseEntity(): void
+    /**
+     * @return array
+     */
+    public function extendJoinWithExtendedEntityProvider(): array
     {
-        /** @var \Doctrine\ORM\EntityManager $entityManager */
-        $entityManager = $this->getMockBuilder(EntityManagerInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
-        $queryBuilder = new QueryBuilder($entityManager);
-
         $extensionMap = [BaseProduct::class => Product::class];
-
-        $entityNameResolver = new EntityNameResolver($extensionMap);
-        $queryBuilderExtender = new QueryBuilderExtender($entityNameResolver);
-        $queryBuilder->from(Category::class, 'c');
-        $queryBuilderExtender->addOrExtendJoin($queryBuilder, Product::class, 'p', '1 = 1');
-        $queryBuilderExtender->addOrExtendJoin($queryBuilder, BaseProduct::class, 'p', '0 = 0');
-
-        $joinDqlPart = $queryBuilder->getDQLPart('join');
-        $this->assertCount(1, reset($joinDqlPart));
+        return [
+            'extend base entity join with extended entity' => [
+                'firstJoinedEntity' => BaseProduct::class,
+                'secondJoinedEntity' => Product::class,
+                'extensionMap' => $extensionMap,
+            ],
+            'extend extended entity join with base entity' => [
+                'firstJoinedEntity' => Product::class,
+                'secondJoinedEntity' => BaseProduct::class,
+                'extensionMap' => $extensionMap,
+            ],
+        ];
     }
 }
