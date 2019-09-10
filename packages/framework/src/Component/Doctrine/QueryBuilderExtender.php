@@ -64,7 +64,7 @@ class QueryBuilderExtender
 
         if (!$joinAlreadyUsed) {
             $queryBuilder->join(
-                $class,
+                $resolvedClass,
                 $alias,
                 Join::WITH,
                 $condition
