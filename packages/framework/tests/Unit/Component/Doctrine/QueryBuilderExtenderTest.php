@@ -36,10 +36,15 @@ class QueryBuilderExtenderTest extends TestCase
      * @dataProvider extendJoinWithExtendedEntityProvider
      * @param string $firstJoinedEntity
      * @param string $secondJoinedEntity
+     * @param string $expectedJoinedEntity
      * @param array $extensionMap
      */
-    public function testExtendJoinWithExtendedEntity(string $firstJoinedEntity, string $secondJoinedEntity, array $extensionMap): void
-    {
+    public function testExtendJoinWithExtendedEntity(
+        string $firstJoinedEntity,
+        string $secondJoinedEntity,
+        string $expectedJoinedEntity,
+        array $extensionMap
+    ): void {
         /** @var \Doctrine\ORM\EntityManager $entityManager */
         $entityManager = $this->getMockBuilder(EntityManagerInterface::class)
             ->disableOriginalConstructor()
@@ -48,12 +53,14 @@ class QueryBuilderExtenderTest extends TestCase
 
         $entityNameResolver = new EntityNameResolver($extensionMap);
         $queryBuilderExtender = new QueryBuilderExtender($entityNameResolver);
-        $queryBuilder->from(Category::class, 'c');
-        $queryBuilderExtender->addOrExtendJoin($queryBuilder, $firstJoinedEntity, 'p', '1 = 1');
-        $queryBuilderExtender->addOrExtendJoin($queryBuilder, $secondJoinedEntity, 'p', '0 = 0');
+        $queryBuilder
+            ->select('c')
+            ->from(Category::class, 'c');
+        $queryBuilderExtender->addOrExtendJoin($queryBuilder, $firstJoinedEntity, 'p', '0 = 0');
+        $queryBuilderExtender->addOrExtendJoin($queryBuilder, $secondJoinedEntity, 'p', '1 = 1');
 
-        $joinDqlPart = $queryBuilder->getDQLPart('join');
-        $this->assertCount(1, reset($joinDqlPart));
+        $dql = $queryBuilder->getDQL();
+        $this->assertSame('SELECT c FROM ' . Category::class . ' c INNER JOIN ' . $expectedJoinedEntity . ' p WITH 0 = 0 WHERE 1 = 1', $dql);
     }
 
     /**
@@ -66,11 +73,13 @@ class QueryBuilderExtenderTest extends TestCase
             'extend base entity join with extended entity' => [
                 'firstJoinedEntity' => BaseProduct::class,
                 'secondJoinedEntity' => Product::class,
+                'expectedJoinedEntity' => Product::class,
                 'extensionMap' => $extensionMap,
             ],
             'extend extended entity join with base entity' => [
                 'firstJoinedEntity' => Product::class,
                 'secondJoinedEntity' => BaseProduct::class,
+                'expectedJoinedEntity' => Product::class,
                 'extensionMap' => $extensionMap,
             ],
         ];
