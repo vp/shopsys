@@ -51,4 +51,24 @@ class QueryBuilderExtenderTest extends TestCase
         $joinDqlPart = $queryBuilder->getDQLPart('join');
         $this->assertCount(1, reset($joinDqlPart));
     }
+
+    public function testExtendExtendedEntityJoinWithBaseEntity(): void
+    {
+        /** @var \Doctrine\ORM\EntityManager $entityManager */
+        $entityManager = $this->getMockBuilder(EntityManagerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $queryBuilder = new QueryBuilder($entityManager);
+
+        $extensionMap = [BaseProduct::class => Product::class];
+
+        $entityNameResolver = new EntityNameResolver($extensionMap);
+        $queryBuilderExtender = new QueryBuilderExtender($entityNameResolver);
+        $queryBuilder->from(Category::class, 'c');
+        $queryBuilderExtender->addOrExtendJoin($queryBuilder, Product::class, 'p', '1 = 1');
+        $queryBuilderExtender->addOrExtendJoin($queryBuilder, BaseProduct::class, 'p', '0 = 0');
+
+        $joinDqlPart = $queryBuilder->getDQLPart('join');
+        $this->assertCount(1, reset($joinDqlPart));
+    }
 }
