@@ -7,6 +7,7 @@ use Shopsys\FrameworkBundle\Component\Grid\GridFactory;
 use Shopsys\FrameworkBundle\Component\Grid\GridFactoryInterface;
 use Shopsys\FrameworkBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\FrameworkBundle\Model\Order\PromoCode\PromoCode;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\Currency;
 
 class PromoCodeGridFactory implements GridFactoryInterface
 {
@@ -40,8 +41,9 @@ class PromoCodeGridFactory implements GridFactoryInterface
     {
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
-            ->select('pc')
-            ->from(PromoCode::class, 'pc');
+            ->select('pc, c')
+            ->from(PromoCode::class, 'pc')
+            ->join(Currency::class, 'c', 'WITH', 'pc.currency = c.id');
         $dataSource = new QueryBuilderDataSource($queryBuilder, 'pc.id');
 
         $grid = $this->gridFactory->create('promoCodeList', $dataSource);
