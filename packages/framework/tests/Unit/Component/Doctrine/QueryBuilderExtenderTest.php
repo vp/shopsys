@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\FrameworkBundle\Component\Doctrine;
+namespace Tests\FrameworkBundle\Unit\Component\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
@@ -13,7 +13,7 @@ use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
 
 class QueryBuilderExtenderTest extends TestCase
 {
-    public function testAddFirstJoinToQueryBuilder()
+    public function testAddFirstJoinToQueryBuilder(): void
     {
         /** @var \Doctrine\ORM\EntityManager $entityManager */
         $entityManager = $this->getMockBuilder(EntityManagerInterface::class)
