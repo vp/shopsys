@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Shopsys\FrameworkBundle\Component\Doctrine\QueryBuilderExtender;
 use Shopsys\FrameworkBundle\Model\Category\Category;
 use Shopsys\FrameworkBundle\Model\Product\Product as BaseProduct;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 class QueryBuilderExtenderTest extends TestCase
 {
@@ -24,6 +25,23 @@ class QueryBuilderExtenderTest extends TestCase
         $queryBuilderExtender = new QueryBuilderExtender();
         $queryBuilder->from(Category::class, 'c');
         $queryBuilderExtender->addOrExtendJoin($queryBuilder, BaseProduct::class, 'p', '1 = 1');
+
+        $joinDqlPart = $queryBuilder->getDQLPart('join');
+        $this->assertCount(1, reset($joinDqlPart));
+    }
+
+    public function testExtendBaseEntityJoinWithExtendedEntity(): void
+    {
+        /** @var \Doctrine\ORM\EntityManager $entityManager */
+        $entityManager = $this->getMockBuilder(EntityManagerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
+        $queryBuilder = new QueryBuilder($entityManager);
+
+        $queryBuilderExtender = new QueryBuilderExtender();
+        $queryBuilder->from(Category::class, 'c');
+        $queryBuilderExtender->addOrExtendJoin($queryBuilder, BaseProduct::class, 'p', '1 = 1');
+        $queryBuilderExtender->addOrExtendJoin($queryBuilder, Product::class, 'p', '0 = 0');
 
         $joinDqlPart = $queryBuilder->getDQLPart('join');
         $this->assertCount(1, reset($joinDqlPart));
