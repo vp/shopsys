@@ -4,10 +4,24 @@ namespace Shopsys\FrameworkBundle\Component\Doctrine;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
+use Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver;
 
 class QueryBuilderExtender
 {
     protected const REQUIRED_ALIASES_COUNT = 1;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver
+     */
+    protected $entityNameResolver;
+
+    /**
+     * @param \Shopsys\FrameworkBundle\Component\EntityExtension\EntityNameResolver $entityNameResolver
+     */
+    public function __construct(EntityNameResolver $entityNameResolver)
+    {
+        $this->entityNameResolver = $entityNameResolver;
+    }
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
@@ -21,9 +35,11 @@ class QueryBuilderExtender
         $joins = $this->getJoinsFromQueryBuilder($queryBuilder);
 
         $joinAlreadyUsed = false;
+        $resolvedClass = $this->entityNameResolver->resolve($class);
         foreach ($joins as $join) {
             /* @var $join \Doctrine\ORM\Query\Expr\Join */
-            if ($join->getJoin() === $class) {
+            $resolvedJoinClass = $this->entityNameResolver->resolve($join->getJoin());
+            if ($resolvedJoinClass === $resolvedClass) {
                 $joinAlreadyUsed = true;
                 break;
             }
