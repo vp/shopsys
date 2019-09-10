@@ -25,7 +25,7 @@ class QueryBuilderExtenderTest extends TestCase
         $queryBuilder->from(Category::class, 'c');
         $queryBuilderExtender->addOrExtendJoin($queryBuilder, BaseProduct::class, 'p', '1 = 1');
 
-        $joins = $queryBuilder->getDQLPart('join');
-        $this->assertCount(1, $joins);
+        $joinDqlPart = $queryBuilder->getDQLPart('join');
+        $this->assertCount(1, reset($joinDqlPart));
     }
 }
