@@ -1,0 +1,7 @@
+RefreshTokenInput:
+    type: input-object
+    config:
+        fields:
+            refreshToken:
+                type: "String!"
+                description: "Refresh token to renew access token"

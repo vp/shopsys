@@ -1,7 +1,6 @@
-@@ -37,6 +37,14 @@
-                 csrf_token_generator: security.csrf.token_manager
-                 csrf_token_id: admin_logout
-                 invalidate_session: false
+@@ -45,5 +45,13 @@
+             stateless: true
+             anonymous: true
 +        backend_api_token:
 +            pattern: ^/api/token$
 +            security: false

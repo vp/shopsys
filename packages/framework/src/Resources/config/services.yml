@@ -1030,3 +1030,12 @@ services:
         class: Shopsys\FrameworkBundle\Model\Product\Mutation\ProductMutation
         tags:
             - { name: overblog_graphql.mutation}
+
+    security.login.mutation:
+        class: Shopsys\FrameworkBundle\Model\Security\GraphQl\Mutation\LoginMutation
+        tags:
+            - { name: overblog_graphql.mutation}
+
+    Shopsys\FrameworkBundle\Model\Security\ApiKeyAuthenticator: ~
+
+    Shopsys\FrameworkBundle\Model\Security\JwtSigner: ~

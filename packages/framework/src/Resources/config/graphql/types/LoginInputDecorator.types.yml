@@ -1,0 +1,11 @@
+LoginInputDecorator:
+    type: input-object
+    decorator: true
+    config:
+        fields:
+            email:
+                type: "String!"
+                description: "The user email linked to his profile."
+            password:
+                type: "String!"
+                description: "The user password linked to his email."

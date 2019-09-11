@@ -150,7 +150,8 @@
         "vasek-purchart/console-errors-bundle": "^1.0.1",
         "webmozart/assert": "^1.4",
         "trikoder/oauth2-bundle": "^1.1",
-        "overblog/graphql-bundle": "^0.12.2"
+        "overblog/graphql-bundle": "^0.12.2",
+        "lcobucci/jwt": "^3.3"
     },
     "require-dev": {
         "ext-pgsql": "*",

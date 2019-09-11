@@ -1,0 +1,8 @@
+Token:
+    type: object
+    config:
+        fields:
+            accessToken:
+                type: "String!"
+            refreshToken:
+                type: "String"

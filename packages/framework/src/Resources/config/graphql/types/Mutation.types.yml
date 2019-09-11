@@ -9,3 +9,17 @@ MutationDecorator:
                 args:
                     input:
                         type: ProductInput!
+            Login:
+                type: Token!
+                description: "Allow to log an User"
+                args:
+                    input:
+                        type: LoginInput!
+                resolve: "@=mutation('user_login', [args])"
+            RefreshAccessToken:
+                type: Token!
+                description: "Refresh user's access token thanks to refresh token"
+                args:
+                    input:
+                        type: RefreshTokenInput!
+                resolve: "@=mutation('refresh_access_token', [args])"
