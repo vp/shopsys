@@ -1,0 +1,45 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+
+msgid "1920x1080 (Full HD)"
+msgstr ""
+
+msgid "22\" Sencor SLE 22F46DM4 HELLO KITTY"
+msgstr ""
+
+msgid "27\""
+msgstr ""
+
+msgid "HDMI"
+msgstr ""
+
+msgid "LED"
+msgstr ""
+
+msgid "Resolution"
+msgstr ""
+
+msgid "Screen size"
+msgstr ""
+
+msgid "Technology"
+msgstr ""
+
+msgid "Television LED, 55 cm diagonal, 1920x1080 Full HD, DVB-T MPEG4 tuner with USB recording and playback"
+msgstr ""
+
+msgid "Television LED, 55 cm diagonal, 1920x1080 Full HD, DVB-T MPEG4 tuner with USB recording and playback (DivX, XviD, MP3, WMA, JPEG), HDMI, SCART, VGA, pink execution, energ. Class B"
+msgstr ""
+
+msgid "This is description of brand %brandName%."
+msgstr "Toto je popis značky %brandName%."
+
+msgid "USB"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+

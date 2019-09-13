@@ -271,6 +271,9 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+msgid "News"
+msgstr ""
+
 msgid "No"
 msgstr ""
 

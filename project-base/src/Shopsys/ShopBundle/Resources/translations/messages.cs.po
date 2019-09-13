@@ -271,6 +271,9 @@ msgstr "Mé objednávky"
 msgid "Name"
 msgstr "Název"
 
+msgid "News"
+msgstr ""
+
 msgid "No"
 msgstr "Ne"
 

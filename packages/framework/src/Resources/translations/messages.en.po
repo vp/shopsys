@@ -646,6 +646,9 @@ msgstr ""
 msgid "Discount"
 msgstr ""
 
+msgid "Discount (%)"
+msgstr ""
+
 msgid "Display"
 msgstr ""
 
@@ -872,6 +875,12 @@ msgid "Editing product"
 msgstr ""
 
 msgid "Editing product - %name%"
+msgstr ""
+
+msgid "Editing promo code"
+msgstr ""
+
+msgid "Editing promo code - %code%"
 msgstr ""
 
 msgid "Editing script"
@@ -1201,9 +1210,6 @@ msgstr ""
 msgid "Log in as user"
 msgstr ""
 
-msgid "Log in failed."
-msgstr ""
-
 msgid "Log out"
 msgstr ""
 
@@ -1322,6 +1328,9 @@ msgid "New payment"
 msgstr ""
 
 msgid "New product"
+msgstr ""
+
+msgid "New promo code"
 msgstr ""
 
 msgid "New registered customers"
@@ -1712,6 +1721,12 @@ msgid "Products overview"
 msgstr ""
 
 msgid "Promo code"
+msgstr ""
+
+msgid "Promo code <strong><a href=\"{{ url }}\">{{ code }}</a></strong> created"
+msgstr ""
+
+msgid "Promo code <strong><a href=\"{{ url }}\">{{ code }}</a></strong> was modified"
 msgstr ""
 
 msgid "Promo code <strong>{{ code }}</strong> deleted."
