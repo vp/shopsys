@@ -54,7 +54,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
         if (!$userProvider instanceof FrontendUserProvider) {
             throw new InvalidArgumentException(
                 sprintf(
-                    'The user provider must be an instance of ApiKeyUserProvider (%s was given).',
+                    'The user provider must be an instance of FrontendUserProvider (%s was given).',
                     get_class($userProvider)
                 )
             );
