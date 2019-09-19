@@ -7,6 +7,7 @@ namespace Shopsys\ShopBundle\DataFixtures\Demo;
 use DateTime;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Money\Money;
+use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\Product\ProductData;
@@ -95,21 +96,29 @@ class ProductDataFixtureLoader
     protected $pricingGroupFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade
+     */
+    protected $currencyFacade;
+
+    /**
      * @param \Shopsys\ShopBundle\DataFixtures\Demo\ProductParametersFixtureLoader $productParametersFixtureLoader
-     * @param \Shopsys\ShopBundle\Model\Product\ProductDataFactory $productDataFactory
+     * @param \Shopsys\FrameworkBundle\Model\Product\ProductDataFactoryInterface $productDataFactory
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupFacade
+     * @param \Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade $currencyFacade
      */
     public function __construct(
         ProductParametersFixtureLoader $productParametersFixtureLoader,
         ProductDataFactoryInterface $productDataFactory,
         Domain $domain,
-        PricingGroupFacade $pricingGroupFacade
+        PricingGroupFacade $pricingGroupFacade,
+        CurrencyFacade $currencyFacade
     ) {
         $this->productParametersFixtureLoader = $productParametersFixtureLoader;
         $this->productDataFactory = $productDataFactory;
         $this->domain = $domain;
         $this->pricingGroupFacade = $pricingGroupFacade;
+        $this->currencyFacade = $currencyFacade;
     }
 
     /**
@@ -336,21 +345,30 @@ class ProductDataFixtureLoader
      */
     protected function setProductDataPricesFromCsv(array $row, ProductData $productData, $domainId)
     {
-        $manualPricesColumn = '';
-        if ($domainId === 1) {
-            $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_1];
-        } elseif ($domainId === 2) {
-            $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_2];
-        }
+        $manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_1];
         $manualPricesFromCsv = $this->getProductManualPricesIndexedByPricingGroupFromString($manualPricesColumn);
-        foreach ($manualPricesFromCsv as $pricingGroup => $manualPrice) {
-            $pricingGroup = $this->pricingGroups[$pricingGroup];
-            $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = $manualPrice;
+
+        foreach (array_values($manualPricesFromCsv) as $manualPrice) {
+            $this->addPriceForAllPricingGroups($productData, $manualPrice->getAmount());
         }
 
         $manualInputPricesFromCsvByPricingGroupId = $productData->manualInputPricesByPricingGroupId;
         $manualPricesForAllPricingGroups = $this->addZeroPricesForPricingGroupsThatAreMissingInDemoData($manualInputPricesFromCsvByPricingGroupId);
         $productData->manualInputPricesByPricingGroupId = $manualPricesForAllPricingGroups;
+    }
+
+    /**
+     * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
+     * @param string $price
+     */
+    protected function addPriceForAllPricingGroups(ProductData $productData, string $price): void
+    {
+        foreach ($this->domain->getAllIncludingDomainConfigsWithoutDataCreated() as $domain) {
+            foreach ($this->pricingGroupFacade->getByDomainId($domain->getId()) as $pricingGroup) {
+                $currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domain->getId());
+                $productData->manualInputPricesByPricingGroupId[$pricingGroup->getId()] = Money::create((string)($price / $currency->getExchangeRate()));
+            }
+        }
     }
 
     /**
