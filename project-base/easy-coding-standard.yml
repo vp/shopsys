@@ -44,3 +44,6 @@ parameters:
         Shopsys\CodingStandards\Sniffs\ForbiddenDoctrineInheritanceSniff:
             - '*/src/Shopsys/ShopBundle/*'
             - '*/tests/ShopBundle/*'
+
+        PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff:
+            - '*/src/Shopsys/ShopBundle/DataFixtures/Demo/CategoryDataFixture'
