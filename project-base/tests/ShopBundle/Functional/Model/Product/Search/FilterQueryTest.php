@@ -19,6 +19,8 @@ class FilterQueryTest extends TransactionFunctionalTestCase
 
     public function testBrand(): void
     {
+        $this->skipTestIfFirstDomainIsNotInEnglish();
+
         $filter = $this->createFilter()
             ->filterByBrands([1]);
 
@@ -27,6 +29,8 @@ class FilterQueryTest extends TransactionFunctionalTestCase
 
     public function testFlag(): void
     {
+        $this->skipTestIfFirstDomainIsNotInEnglish();
+
         $filter = $this->createFilter()
             ->filterByFlags([3])
             ->applyDefaultOrdering();
@@ -36,6 +40,8 @@ class FilterQueryTest extends TransactionFunctionalTestCase
 
     public function testFlagBrand(): void
     {
+        $this->skipTestIfFirstDomainIsNotInEnglish();
+
         $filter = $this->createFilter()
             ->filterByBrands([12])
             ->filterByFlags([1])
@@ -46,6 +52,8 @@ class FilterQueryTest extends TransactionFunctionalTestCase
 
     public function testMultiFilter(): void
     {
+        $this->skipTestIfFirstDomainIsNotInEnglish();
+
         /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
@@ -60,7 +68,9 @@ class FilterQueryTest extends TransactionFunctionalTestCase
 
     public function testParameters(): void
     {
-        $parameters = [51 => [109, 115], 50 => [105, 121], 10 => [107]];
+        $this->skipTestIfFirstDomainIsNotInEnglish();
+
+        $parameters = [50 => [109, 115], 49 => [105, 121], 10 => [107]];
 
         $filter = $this->createFilter()
             ->filterByParameters($parameters);
@@ -70,6 +80,8 @@ class FilterQueryTest extends TransactionFunctionalTestCase
 
     public function testOrdering(): void
     {
+        $this->skipTestIfFirstDomainIsNotInEnglish();
+
         /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
 
@@ -94,6 +106,8 @@ class FilterQueryTest extends TransactionFunctionalTestCase
 
     public function testMatchQuery(): void
     {
+        $this->skipTestIfFirstDomainIsNotInEnglish();
+
         $filter = $this->createFilter();
 
         $kittyFilter = $filter->search('kitty');
@@ -105,6 +119,8 @@ class FilterQueryTest extends TransactionFunctionalTestCase
 
     public function testPagination(): void
     {
+        $this->skipTestIfFirstDomainIsNotInEnglish();
+
         $filter = $this->createFilter()
             ->filterByCategory([9])
             ->applyDefaultOrdering();
