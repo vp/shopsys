@@ -415,11 +415,11 @@ msgstr "Cena do"
 msgid "Print"
 msgstr "Vytisknout"
 
-msgid "Product <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }}) added to the cart"
-msgstr "Do košíku bylo vloženo zboží <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }})"
+msgid "Product <strong>%name%</strong> (%quantity% %unitName%) added to the cart"
+msgstr "Do košíku bylo vloženo zboží <strong>%name%</strong> (%quantity% %unitName%)"
 
-msgid "Product <strong>{{ name }}</strong> added to the cart (total amount {{ quantity|formatNumber }} {{ unitName }})"
-msgstr "Do košíku bylo vloženo zboží <strong>{{ name }}</strong> (celkem již {{ quantity|formatNumber }} {{ unitName }})"
+msgid "Product <strong>%name%</strong> added to the cart (total amount %quantity% %unitName%)"
+msgstr "Do košíku bylo vloženo zboží <strong>%name%<</strong> (celkem již %quantity% %unitName%)"
 
 msgid "Product information"
 msgstr "Informace o produktu"

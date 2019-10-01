@@ -167,11 +167,13 @@ class ProductController extends AdminBaseController
 
             $this->getFlashMessageSender()
                 ->addSuccessFlashTwig(
-                    t('Product <strong><a href="{{ url }}">{{ product|productDisplayName }}</a></strong> modified'),
-                    [
-                        'product' => $product,
-                        'url' => $this->generateUrl('admin_product_edit', ['id' => $product->getId()]),
-                    ]
+                    t(
+                        'Product <strong><a href="%url%">%productName%</a></strong> modified',
+                        [
+                            '%productName%' => $this->productExtension->getProductDisplayName($product),
+                            '%url%' => $this->generateUrl('admin_product_edit', ['id' => $product->getId()]),
+                        ]
+                    )
                 );
 
             return $this->redirectToRoute('admin_product_list');

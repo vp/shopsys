@@ -21,6 +21,7 @@ modules:
         # so DomainHelper must be included after WebDriver.
         - Tests\ShopBundle\Test\Codeception\Helper\DomainHelper
         - Tests\ShopBundle\Test\Codeception\Helper\CloseNewlyOpenedWindowsHelper
+        - Tests\ShopBundle\Test\Codeception\Helper\LocalizationHelper
     config:
         Tests\ShopBundle\Test\Codeception\Module\Db:
             dsn: ~

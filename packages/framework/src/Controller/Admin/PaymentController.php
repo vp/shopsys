@@ -115,11 +115,13 @@ class PaymentController extends AdminBaseController
             $this->paymentFacade->edit($payment, $paymentData);
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(
-                t('Payment <strong><a href="{{ url }}">{{ name }}</a></strong> modified'),
-                [
-                    'name' => $payment->getName(),
-                    'url' => $this->generateUrl('admin_payment_edit', ['id' => $payment->getId()]),
-                ]
+                t(
+                    'Payment <strong><a href="%url%">%name%</a></strong> modified',
+                    [
+                        '%name%' => $payment->getName(),
+                        '%url%' => $this->generateUrl('admin_payment_edit', ['id' => $payment->getId()]),
+                    ]
+                )
             );
             return $this->redirectToRoute('admin_transportandpayment_list');
         }

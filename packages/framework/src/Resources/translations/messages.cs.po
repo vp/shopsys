@@ -1552,11 +1552,11 @@ msgstr "Heslo musí obsahovat alespoň šest znaků a nemůže být stejné jako
 msgid "Payment"
 msgstr "Platba"
 
+msgid "Payment <strong><a href=\"%url%\">%name%</a></strong> modified"
+msgstr "Byla upravena platba <strong><a href=\"%url%\">%name%</a></strong>"
+
 msgid "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byla vytvořena platba <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
-
-msgid "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
-msgstr "Byla upravena platba <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
 msgid "Payment <strong>{{ name }}</strong> deleted"
 msgstr "Platba <strong>{{ name }}</strong> byla smazána"
@@ -1657,11 +1657,11 @@ msgstr "Zásady ochrany osobních údajů"
 msgid "Product"
 msgstr "Zboží"
 
+msgid "Product <strong><a href=\"%url%\">%productName%</a></strong> modified"
+msgstr "Bylo upraveno zboží <strong><a href=\"%url%\">%productName%</a></strong>"
+
 msgid "Product <strong><a href=\"{{ url }}\">{{ product|productDisplayName }}</a></strong> created"
 msgstr "Bylo vytvořeno zboží <strong><a href=\"{{ url }}\">{{ product|productDisplayName }}</a></strong>"
-
-msgid "Product <strong><a href=\"{{ url }}\">{{ product|productDisplayName }}</a></strong> modified"
-msgstr "Bylo upraveno zboží <strong><a href=\"{{ url }}\">{{ product|productDisplayName }}</a></strong>"
 
 msgid "Product <strong>{{ name }}</strong> you had in cart is no longer available. Please check your order."
 msgstr "Zboží <strong>{{ name }}</strong>, které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku."
@@ -1942,11 +1942,11 @@ msgstr "Nastavení bylo upraveno."
 msgid "Shipping"
 msgstr "Doprava"
 
+msgid "Shipping <strong><a href=\"%url%\">%name%</a></strong> was modified"
+msgstr "Byla upravena doprava <strong><a href=\"%url%\">%name%</a></strong>"
+
 msgid "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr "Byla vytvořena doprava <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
-
-msgid "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> was modified"
-msgstr "Byla upravena doprava <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
 
 msgid "Shipping <strong>{{ name }}</strong> deleted"
 msgstr "Doprava <strong>{{ name }}</strong> byla smazána"
@@ -2215,8 +2215,8 @@ msgstr "Přepočítávání cen bylo zakázáno, nezapomeňte upravovat všechny
 msgid "VAT"
 msgstr "DPH"
 
-msgid "VAT <strong>{{ name }}</strong> deleted"
-msgstr "DPH <strong>{{ name }}</strong> bylo smazáno"
+msgid "VAT <strong>%name%</strong> deleted"
+msgstr "DPH <strong>%name%</strong> bylo smazáno"
 
 msgid "VAT <strong>{{ name }}</strong> deleted and replaced by <strong>{{ newName }}</strong>."
 msgstr "DPH <strong>{{ name }}</strong> bylo smazáno a bylo nahrazeno <strong>{{ newName }}</strong>."

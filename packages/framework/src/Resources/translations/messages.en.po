@@ -1552,10 +1552,10 @@ msgstr ""
 msgid "Payment"
 msgstr ""
 
-msgid "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
+msgid "Payment <strong><a href=\"%url%\">%name%</a></strong> modified"
 msgstr ""
 
-msgid "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
+msgid "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
 msgid "Payment <strong>{{ name }}</strong> deleted"
@@ -1657,10 +1657,10 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-msgid "Product <strong><a href=\"{{ url }}\">{{ product|productDisplayName }}</a></strong> created"
+msgid "Product <strong><a href=\"%url%\">%productName%</a></strong> modified"
 msgstr ""
 
-msgid "Product <strong><a href=\"{{ url }}\">{{ product|productDisplayName }}</a></strong> modified"
+msgid "Product <strong><a href=\"{{ url }}\">{{ product|productDisplayName }}</a></strong> created"
 msgstr ""
 
 msgid "Product <strong>{{ name }}</strong> you had in cart is no longer available. Please check your order."
@@ -1942,10 +1942,10 @@ msgstr ""
 msgid "Shipping"
 msgstr ""
 
-msgid "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
+msgid "Shipping <strong><a href=\"%url%\">%name%</a></strong> was modified"
 msgstr ""
 
-msgid "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> was modified"
+msgid "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 msgstr ""
 
 msgid "Shipping <strong>{{ name }}</strong> deleted"
@@ -2215,7 +2215,7 @@ msgstr ""
 msgid "VAT"
 msgstr ""
 
-msgid "VAT <strong>{{ name }}</strong> deleted"
+msgid "VAT <strong>%name%</strong> deleted"
 msgstr ""
 
 msgid "VAT <strong>{{ name }}</strong> deleted and replaced by <strong>{{ newName }}</strong>."

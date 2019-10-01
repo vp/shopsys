@@ -116,10 +116,12 @@ class VatController extends AdminBaseController
 
             if ($newId === null) {
                 $this->getFlashMessageSender()->addSuccessFlashTwig(
-                    t('VAT <strong>{{ name }}</strong> deleted'),
-                    [
-                        'name' => $fullName,
-                    ]
+                    t(
+                        'VAT <strong>%name%</strong> deleted',
+                        [
+                            '%name%' => $fullName,
+                        ]
+                    )
                 );
             } else {
                 $newVat = $this->vatFacade->getById($newId);

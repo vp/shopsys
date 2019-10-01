@@ -12,6 +12,7 @@ use Shopsys\FrameworkBundle\Model\Module\ModuleList;
 use Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory;
 use Shopsys\FrameworkBundle\Model\Product\Product;
 use Shopsys\FrameworkBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade;
+use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 use Shopsys\ReadModelBundle\Product\Action\ProductActionView;
 use Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface;
 use Shopsys\ShopBundle\Form\Front\Cart\AddProductFormType;
@@ -56,12 +57,18 @@ class CartController extends FrontBaseController
     private $listedProductViewFacade;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension
+     */
+    protected $numberFormatterExtension;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Cart\CartFacade $cartFacade
      * @param \Shopsys\FrameworkBundle\Component\Domain\Domain $domain
      * @param \Shopsys\FrameworkBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade $freeTransportAndPaymentFacade
      * @param \Shopsys\FrameworkBundle\Model\Order\Preview\OrderPreviewFactory $orderPreviewFactory
      * @param \Shopsys\FrameworkBundle\Component\FlashMessage\ErrorExtractor $errorExtractor
      * @param \Shopsys\ReadModelBundle\Product\Listed\ListedProductViewFacadeInterface $listedProductViewFacade
+     * @param \Shopsys\FrameworkBundle\Twig\NumberFormatterExtension $numberFormatterExtension
      */
     public function __construct(
         CartFacade $cartFacade,
@@ -69,7 +76,8 @@ class CartController extends FrontBaseController
         FreeTransportAndPaymentFacade $freeTransportAndPaymentFacade,
         OrderPreviewFactory $orderPreviewFactory,
         ErrorExtractor $errorExtractor,
-        ListedProductViewFacadeInterface $listedProductViewFacade
+        ListedProductViewFacadeInterface $listedProductViewFacade,
+        NumberFormatterExtension $numberFormatterExtension
     ) {
         $this->cartFacade = $cartFacade;
         $this->domain = $domain;
@@ -77,6 +85,7 @@ class CartController extends FrontBaseController
         $this->orderPreviewFactory = $orderPreviewFactory;
         $this->errorExtractor = $errorExtractor;
         $this->listedProductViewFacade = $listedProductViewFacade;
+        $this->numberFormatterExtension = $numberFormatterExtension;
     }
 
     /**
@@ -283,21 +292,25 @@ class CartController extends FrontBaseController
     ) {
         if ($addProductResult->getIsNew()) {
             $this->getFlashMessageSender()->addSuccessFlashTwig(
-                t('Product <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }}) added to the cart'),
-                [
-                    'name' => $addProductResult->getCartItem()->getName(),
-                    'quantity' => $addProductResult->getAddedQuantity(),
-                    'unitName' => $addProductResult->getCartItem()->getProduct()->getUnit()->getName(),
-                ]
+                t(
+                    'Product <strong>%name%</strong> (%quantity% %unitName%) added to the cart',
+                    [
+                        '%name%' => $addProductResult->getCartItem()->getName(),
+                        '%quantity%' => $this->numberFormatterExtension->formatNumber($addProductResult->getAddedQuantity()),
+                        '%unitName%' => $addProductResult->getCartItem()->getProduct()->getUnit()->getName(),
+                    ]
+                )
             );
         } else {
             $this->getFlashMessageSender()->addSuccessFlashTwig(
-                t('Product <strong>{{ name }}</strong> added to the cart (total amount {{ quantity|formatNumber }} {{ unitName }})'),
-                [
-                    'name' => $addProductResult->getCartItem()->getName(),
-                    'quantity' => $addProductResult->getCartItem()->getQuantity(),
-                    'unitName' => $addProductResult->getCartItem()->getProduct()->getUnit()->getName(),
-                ]
+                t(
+                    'Product <strong>%name%</strong> added to the cart (total amount %quantity% %unitName%)',
+                    [
+                        '%name%' => $addProductResult->getCartItem()->getName(),
+                        '%quantity%' => $this->numberFormatterExtension->formatNumber($addProductResult->getCartItem()->getQuantity()),
+                        '%unitName%' => $addProductResult->getCartItem()->getProduct()->getUnit()->getName(),
+                    ]
+                )
             );
         }
     }

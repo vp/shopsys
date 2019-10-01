@@ -415,10 +415,10 @@ msgstr ""
 msgid "Print"
 msgstr ""
 
-msgid "Product <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }}) added to the cart"
+msgid "Product <strong>%name%</strong> (%quantity% %unitName%) added to the cart"
 msgstr ""
 
-msgid "Product <strong>{{ name }}</strong> added to the cart (total amount {{ quantity|formatNumber }} {{ unitName }})"
+msgid "Product <strong>%name%</strong> added to the cart (total amount %quantity% %unitName%)"
 msgstr ""
 
 msgid "Product information"

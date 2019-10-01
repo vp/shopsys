@@ -115,11 +115,13 @@ class TransportController extends AdminBaseController
             $this->transportFacade->edit($transport, $transportData);
 
             $this->getFlashMessageSender()->addSuccessFlashTwig(
-                t('Shipping <strong><a href="{{ url }}">{{ name }}</a></strong> was modified'),
-                [
-                    'name' => $transport->getName(),
-                    'url' => $this->generateUrl('admin_transport_edit', ['id' => $transport->getId()]),
-                ]
+                t(
+                    'Shipping <strong><a href="%url%">%name%</a></strong> was modified',
+                    [
+                        '%name%' => $transport->getName(),
+                        '%url%' => $this->generateUrl('admin_transport_edit', ['id' => $transport->getId()]),
+                    ]
+                )
             );
             return $this->redirectToRoute('admin_transportandpayment_list');
         }
