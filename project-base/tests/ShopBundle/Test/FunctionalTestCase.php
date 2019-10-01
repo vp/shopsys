@@ -16,11 +16,16 @@ abstract class FunctionalTestCase extends WebTestCase
      */
     private $client;
 
+    /**
+     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    private $domain;
+
     protected function setUpDomain()
     {
         /** @var \Shopsys\FrameworkBundle\Component\Domain\Domain $domain */
-        $domain = $this->getContainer()->get(Domain::class);
-        $domain->switchDomainById(1);
+        $this->domain = $this->getContainer()->get(Domain::class);
+        $this->domain->switchDomainById(1);
     }
 
     protected function setUp()
@@ -85,5 +90,12 @@ abstract class FunctionalTestCase extends WebTestCase
             ->get(PersistentReferenceFacade::class);
 
         return $persistentReferenceFacade->getReference($referenceName);
+    }
+
+    protected function skipTestIfFirstDomainIsNotInEnglish()
+    {
+        if ($this->domain->getDomainConfigById(1)->getLocale() !== 'en') {
+            $this->markTestSkipped('Tests for product searching are run only when the first domain has English locale');
+        }
     }
 }
