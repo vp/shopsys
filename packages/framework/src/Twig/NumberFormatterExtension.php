@@ -4,6 +4,7 @@ namespace Shopsys\FrameworkBundle\Twig;
 
 use CommerceGuys\Intl\Formatter\NumberFormatter;
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
+use Shopsys\FrameworkBundle\Model\Administration\AdministrationFacade;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Twig_Extension;
 
@@ -23,15 +24,23 @@ class NumberFormatterExtension extends Twig_Extension
     protected $numberFormatRepository;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Administration\AdministrationFacade
+     */
+    protected $administrationFacade;
+
+    /**
      * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
      * @param \CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface $numberFormatRepository
+     * @param \Shopsys\FrameworkBundle\Model\Administration\AdministrationFacade $administrationFacade
      */
     public function __construct(
         Localization $localization,
-        NumberFormatRepositoryInterface $numberFormatRepository
+        NumberFormatRepositoryInterface $numberFormatRepository,
+        AdministrationFacade $administrationFacade
     ) {
         $this->localization = $localization;
         $this->numberFormatRepository = $numberFormatRepository;
+        $this->administrationFacade = $administrationFacade;
     }
 
     /**
@@ -113,11 +122,15 @@ class NumberFormatterExtension extends Twig_Extension
      */
     protected function getLocale($locale = null)
     {
-        if ($locale === null) {
-            $locale = $this->localization->getLocale();
+        if ($locale !== null) {
+            return $locale;
         }
 
-        return $locale;
+        if ($this->administrationFacade->isInAdmin()) {
+            return $this->localization->getAdminLocale();
+        }
+
+        return $this->localization->getLocale();
     }
 
     /**
