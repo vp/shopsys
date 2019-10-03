@@ -13,6 +13,7 @@ use Shopsys\FrameworkBundle\Component\Money\Money;
 use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\FrameworkBundle\Model\Pricing\PriceConverter;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 use Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver;
@@ -65,6 +66,11 @@ class LocalizationHelper extends Module
     private $numberFormatterExtension;
 
     /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\PriceConverter
+     */
+    private $priceConverter;
+
+    /**
      * @param \Codeception\TestInterface $test
      */
     public function _before(TestInterface $test): void
@@ -82,6 +88,7 @@ class LocalizationHelper extends Module
         $this->intlCurrencyRepository = $symfonyHelper->grabServiceFromContainer(CurrencyRepositoryInterface::class);
         $this->unitFacade = $symfonyHelper->grabServiceFromContainer(UnitFacade::class);
         $this->numberFormatterExtension = $symfonyHelper->grabServiceFromContainer(NumberFormatterExtension::class);
+        $this->priceConverter = $symfonyHelper->grabServiceFromContainer(PriceConverter::class);
     }
 
     /**
@@ -236,6 +243,18 @@ class LocalizationHelper extends Module
         $formattedNumberWithPercentSymbol = $this->numberFormatterExtension->formatPercent($number, $this->getAdminLocale());
 
         return $this->normalizeSpaces($formattedNumberWithPercentSymbol);
+    }
+
+    /**
+     * It is not possible to use this method for converting total prices of an order or in cart (because of the price calculation)
+     * @param string $price
+     * @return string
+     */
+    public function getPriceWithVatConvertedToDomainDefaultCurrency(string $price): string
+    {
+        $money = $this->priceConverter->convertPriceWithVatToPriceInDomainDefaultCurrency(Money::create($price), 1);
+
+        return $money->getAmount();
     }
 
     /**
