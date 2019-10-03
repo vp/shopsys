@@ -7,6 +7,8 @@ namespace Tests\ShopBundle\Test\Codeception\Helper;
 use Codeception\Module;
 use Codeception\TestInterface;
 use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
+use CommerceGuys\Intl\Formatter\NumberFormatter;
+use CommerceGuys\Intl\NumberFormat\NumberFormatRepository;
 use Shopsys\FrameworkBundle\Component\CurrencyFormatter\CurrencyFormatterFactory;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Component\Money\Money;
@@ -14,6 +16,7 @@ use Shopsys\FrameworkBundle\Component\Router\DomainRouterFactory;
 use Shopsys\FrameworkBundle\Model\Localization\Localization;
 use Shopsys\FrameworkBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\FrameworkBundle\Model\Pricing\PriceConverter;
+use Shopsys\FrameworkBundle\Model\Pricing\Rounding;
 use Shopsys\FrameworkBundle\Model\Product\Unit\UnitFacade;
 use Shopsys\FrameworkBundle\Twig\NumberFormatterExtension;
 use Tests\ShopBundle\Test\Codeception\Module\StrictWebDriver;
@@ -71,6 +74,16 @@ class LocalizationHelper extends Module
     private $priceConverter;
 
     /**
+     * @var \CommerceGuys\Intl\Formatter\NumberFormatter
+     */
+    private $numberFormatter;
+
+    /**
+     * @var \Shopsys\FrameworkBundle\Model\Pricing\Rounding
+     */
+    private $rounding;
+
+    /**
      * @param \Codeception\TestInterface $test
      */
     public function _before(TestInterface $test): void
@@ -89,6 +102,8 @@ class LocalizationHelper extends Module
         $this->unitFacade = $symfonyHelper->grabServiceFromContainer(UnitFacade::class);
         $this->numberFormatterExtension = $symfonyHelper->grabServiceFromContainer(NumberFormatterExtension::class);
         $this->priceConverter = $symfonyHelper->grabServiceFromContainer(PriceConverter::class);
+        $this->numberFormatter = new NumberFormatter(new NumberFormatRepository());
+        $this->rounding = $symfonyHelper->grabServiceFromContainer(Rounding::class);
     }
 
     /**
@@ -221,7 +236,31 @@ class LocalizationHelper extends Module
 
         $intlCurrency = $this->intlCurrencyRepository->get($firstDomainDefaultCurrency->getCode(), $firstDomainLocale);
 
-        $formattedPriceWithCurrencySymbol = $currencyFormatter->format($price->getAmount(), $intlCurrency->getCurrencyCode());
+        $formattedPriceWithCurrencySymbol = $currencyFormatter->format(
+            $this->rounding->roundPriceWithVat($price)->getAmount(),
+            $intlCurrency->getCurrencyCode()
+        );
+
+        return $this->normalizeSpaces($formattedPriceWithCurrencySymbol);
+    }
+
+    /**
+     * Inspired by formatCurrency() method, {@see \Shopsys\FrameworkBundle\Twig\PriceExtension}
+     * @param \Shopsys\FrameworkBundle\Component\Money\Money $price
+     * @return string
+     */
+    public function getFormattedPriceOnFrontend(Money $price): string
+    {
+        $firstDomainDefaultCurrency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId(1);
+        $firstDomainLocale = $this->getFrontendLocale();
+        $currencyFormatter = $this->currencyFormatterFactory->create($firstDomainLocale);
+
+        $intlCurrency = $this->intlCurrencyRepository->get($firstDomainDefaultCurrency->getCode(), $firstDomainLocale);
+
+        $formattedPriceWithCurrencySymbol = $currencyFormatter->format(
+            $this->rounding->roundPriceWithVat($price)->getAmount(),
+            $intlCurrency->getCurrencyCode()
+        );
 
         return $this->normalizeSpaces($formattedPriceWithCurrencySymbol);
     }
@@ -268,5 +307,15 @@ class LocalizationHelper extends Module
     private function normalizeSpaces(string $text): string
     {
         return preg_replace('~\x{00a0}~siu', ' ', $text);
+    }
+
+    /**
+     * @param string $number
+     * @param string $locale
+     * @return string
+     */
+    public function getNumberFromLocalizedFormat(string $number, string $locale): string
+    {
+        return $this->numberFormatter->parse($number, ['locale' => $locale]);
     }
 }
