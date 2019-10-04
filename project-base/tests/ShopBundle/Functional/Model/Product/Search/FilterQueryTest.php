@@ -59,7 +59,7 @@ class FilterQueryTest extends ParameterTransactionFunctionalTestCase
         $priceConverter = $this->getContainer()->get(PriceConverter::class);
 
         /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup */
-        $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
+        $pricingGroup = $this->getReferenceForDomain(PricingGroupDataFixture::PRICING_GROUP_ORDINARY, 1);
 
         $filter = $this->createFilter()
             ->filterOnlyInStock()
@@ -87,7 +87,7 @@ class FilterQueryTest extends ParameterTransactionFunctionalTestCase
         $this->skipTestIfFirstDomainIsNotInEnglish();
 
         /** @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroup $pricingGroup */
-        $pricingGroup = $this->getReference(PricingGroupDataFixture::PRICING_GROUP_ORDINARY_DOMAIN_1);
+        $pricingGroup = $this->getReferenceForDomain(PricingGroupDataFixture::PRICING_GROUP_ORDINARY, 1);
 
         $filter = $this->createFilter()
             ->filterByCategory([9])

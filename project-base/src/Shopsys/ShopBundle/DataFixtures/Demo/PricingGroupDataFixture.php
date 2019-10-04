@@ -15,10 +15,8 @@ use Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 
 class PricingGroupDataFixture extends AbstractReferenceFixture
 {
-    public const PRICING_GROUP_ORDINARY_DOMAIN = 'pricing_group_ordinary_domain';
-    public const PRICING_GROUP_PARTNER_DOMAIN = 'pricing_group_partner_domain';
-
-    public const PRICING_GROUP_ORDINARY_DOMAIN_1 = 'pricing_group_ordinary_domain_1';
+    public const PRICING_GROUP_ORDINARY = 'pricing_group_ordinary';
+    public const PRICING_GROUP_PARTNER = 'pricing_group_partner';
 
     /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupFacade
@@ -73,7 +71,7 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
 
             if ($domainId !== 2) {
                 $pricingGroupData->name = t('Partner', [], 'dataFixtures', $locale);
-                $this->createPricingGroup($pricingGroupData, $domainId, self::PRICING_GROUP_PARTNER_DOMAIN);
+                $this->createPricingGroup($pricingGroupData, $domainId, self::PRICING_GROUP_PARTNER);
             }
 
             $pricingGroupData->name = t('VIP customer', [], 'dataFixtures', $locale);
@@ -112,6 +110,6 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
         $pricingGroupData->name = t('Ordinary customer', [], 'dataFixtures', $domainConfig->getLocale());
         $defaultPricingGroupOnDomain = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
         $this->pricingGroupFacade->edit($defaultPricingGroupOnDomain->getId(), $pricingGroupData);
-        $this->addReferenceForDomain(self::PRICING_GROUP_ORDINARY_DOMAIN, $defaultPricingGroupOnDomain, $domainConfig->getId());
+        $this->addReferenceForDomain(self::PRICING_GROUP_ORDINARY, $defaultPricingGroupOnDomain, $domainConfig->getId());
     }
 }

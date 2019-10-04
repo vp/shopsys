@@ -92,6 +92,20 @@ abstract class FunctionalTestCase extends WebTestCase
         return $persistentReferenceFacade->getReference($referenceName);
     }
 
+    /**
+     * @param string $referenceName
+     * @param int $domainId
+     * @return object
+     */
+    protected function getReferenceForDomain(string $referenceName, int $domainId)
+    {
+        /** @var \Shopsys\FrameworkBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade */
+        $persistentReferenceFacade = $this->getContainer()
+            ->get(PersistentReferenceFacade::class);
+
+        return $persistentReferenceFacade->getReferenceForDomain($referenceName, $domainId);
+    }
+
     protected function skipTestIfFirstDomainIsNotInEnglish()
     {
         if ($this->getFirstDomainLocale() !== 'en') {
