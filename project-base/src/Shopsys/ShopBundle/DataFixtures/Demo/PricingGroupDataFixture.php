@@ -17,7 +17,6 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
 {
     public const PRICING_GROUP_ORDINARY_DOMAIN = 'pricing_group_ordinary_domain';
     public const PRICING_GROUP_PARTNER_DOMAIN = 'pricing_group_partner_domain';
-    public const PRICING_GROUP_VIP_DOMAIN = 'pricing_group_vip_domain';
 
     public const PRICING_GROUP_ORDINARY_DOMAIN_1 = 'pricing_group_ordinary_domain_1';
 
@@ -78,22 +77,24 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
             }
 
             $pricingGroupData->name = t('VIP customer', [], 'dataFixtures', $locale);
-            $this->createPricingGroup($pricingGroupData, $domainId, self::PRICING_GROUP_VIP_DOMAIN);
+            $this->createPricingGroup($pricingGroupData, $domainId);
         }
     }
 
     /**
      * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
      * @param int $domainId
-     * @param string $referenceName
+     * @param string|null $referenceName
      */
     protected function createPricingGroup(
         PricingGroupData $pricingGroupData,
         int $domainId,
-        string $referenceName
+        ?string $referenceName = null
     ): void {
         $pricingGroup = $this->pricingGroupFacade->create($pricingGroupData, $domainId);
-        $this->addReferenceForDomain($referenceName, $pricingGroup, $domainId);
+        if ($referenceName !== null) {
+            $this->addReferenceForDomain($referenceName, $pricingGroup, $domainId);
+        }
     }
 
     /**
