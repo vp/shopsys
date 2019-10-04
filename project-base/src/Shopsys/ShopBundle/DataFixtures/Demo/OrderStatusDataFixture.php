@@ -85,6 +85,8 @@ class OrderStatusDataFixture extends AbstractReferenceFixture
                 case self::ORDER_STATUS_CANCELED:
                     $orderStatusData->name[$locale] = t('Canceled', [], 'dataFixtures', $locale);
                     break;
+                default:
+                    throw new \Shopsys\FrameworkBundle\Component\DataFixture\Exception\UnknownNameTranslationForOrderStatusReferenceNameException($referenceName);
             }
         }
         $this->orderStatusFacade->edit($orderStatusId, $orderStatusData);
