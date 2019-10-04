@@ -109,9 +109,9 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
         foreach ($this->domain->getAll() as $domainConfig) {
             $domainId = $domainConfig->getId();
             if ($domainId === 2) {
-                $customersData = $this->getCustomersDataForSecondDomain();
+                $customersData = $this->getDistinctCustomersData($domainId);
             } else {
-                $customersData = $this->getCustomersDataForOtherThanSecondDomain($domainId);
+                $customersData = $this->getDefaultCustomersData($domainId);
             }
 
             foreach ($customersData as $customerData) {
@@ -130,7 +130,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
      * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\Customer\CustomerData[]
      */
-    protected function getCustomersDataForOtherThanSecondDomain(int $domainId): array
+    protected function getDefaultCustomersData(int $domainId): array
     {
         $customersData = [];
 
@@ -286,15 +286,16 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     }
 
     /**
+     * @param int $domainId
      * @return \Shopsys\FrameworkBundle\Model\Customer\CustomerData[]
      */
-    protected function getCustomersDataForSecondDomain(): array
+    protected function getDistinctCustomersData(int $domainId): array
     {
         $customersData = [];
 
         // no-reply.2@shopsys.com
         $customerData = $this->customerDataFactory->create();
-        $userData = $this->userDataFactory->createForDomainId(2);
+        $userData = $this->userDataFactory->createForDomainId($domainId);
         $billingAddressData = $this->billingAddressDataFactory->create();
         $userData->firstName = 'Jana';
         $userData->lastName = 'Anovčínová';
@@ -309,7 +310,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 
         // no-reply.4@shopsys.com
         $customerData = $this->customerDataFactory->create();
-        $userData = $this->userDataFactory->createForDomainId(2);
+        $userData = $this->userDataFactory->createForDomainId($domainId);
         $billingAddressData = $this->billingAddressDataFactory->create();
         $userData->firstName = 'Ida';
         $userData->lastName = 'Anpilogova';
@@ -324,7 +325,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 
         // no-reply.6@shopsys.com
         $customerData = $this->customerDataFactory->create();
-        $userData = $this->userDataFactory->createForDomainId(2);
+        $userData = $this->userDataFactory->createForDomainId($domainId);
         $billingAddressData = $this->billingAddressDataFactory->create();
         $userData->firstName = 'Petr';
         $userData->lastName = 'Anrig';
@@ -345,7 +346,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 
         // no-reply.7@shopsys.com
         $customerData = $this->customerDataFactory->create();
-        $userData = $this->userDataFactory->createForDomainId(2);
+        $userData = $this->userDataFactory->createForDomainId($domainId);
         $billingAddressData = $this->billingAddressDataFactory->create();
         $userData->firstName = 'Silva';
         $userData->lastName = 'Anrigová';
@@ -360,7 +361,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 
         // no-reply.8@shopsys.com
         $customerData = $this->customerDataFactory->create();
-        $userData = $this->userDataFactory->createForDomainId(2);
+        $userData = $this->userDataFactory->createForDomainId($domainId);
         $billingAddressData = $this->billingAddressDataFactory->create();
         $userData->firstName = 'Derick';
         $userData->lastName = 'Ansah';
@@ -375,7 +376,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 
         // no-reply@shopsys.com
         $customerData = $this->customerDataFactory->create();
-        $userData = $this->userDataFactory->createForDomainId(2);
+        $userData = $this->userDataFactory->createForDomainId($domainId);
         $billingAddressData = $this->billingAddressDataFactory->create();
         $userData->firstName = 'Johny';
         $userData->lastName = 'English';
