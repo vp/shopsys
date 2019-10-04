@@ -47,7 +47,6 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture implements 
                     2 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '8'),
                     8 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '5'),
                 ];
-
             } else {
                 $productsIndexedByPosition = [$this->getReference(ProductDataFixture::PRODUCT_PREFIX . '7')];
             }
