@@ -74,17 +74,11 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 
         foreach ($this->domain->getAllLocales() as $locale) {
             $paymentData->name[$locale] = t('Credit card', [], 'dataFixtures', $locale);
+            $paymentData->description[$locale] = t('Quick, cheap and reliable!', [], 'dataFixtures', $locale);
+            $paymentData->instructions[$locale] = t('<b>You have chosen payment by credit card. Please finish it in two business days.</b>', [], 'dataFixtures', $locale);
         }
 
         $this->setPriceForAllCurrencies($paymentData, Money::create('99.95'));
-
-        foreach ($this->domain->getAllLocales() as $locale) {
-            $paymentData->description[$locale] = t('Quick, cheap and reliable!', [], 'dataFixtures', $locale);
-        }
-
-        foreach ($this->domain->getAllLocales() as $locale) {
-            $paymentData->instructions[$locale] = t('<b>You have chosen payment by credit card. Please finish it in two business days.</b>', [], 'dataFixtures', $locale);
-        }
 
         $paymentData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
         $this->createPayment(self::PAYMENT_CARD, $paymentData, [
