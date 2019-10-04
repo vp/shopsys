@@ -92,9 +92,9 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         foreach ($this->domain->getAll() as $domainConfig) {
             $domainId = $domainConfig->getId();
             if ($domainId === 2) {
-                $this->loadForSecondDomain();
+                $this->loadDistinct($domainId);
             } else {
-                $this->loadForAnyDomainExcludingSecond($domainId);
+                $this->loadDefault($domainId);
             }
         }
     }
@@ -102,8 +102,10 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
     /**
      * @param int $domainId
      */
-    protected function loadForAnyDomainExcludingSecond(int $domainId): void
+    protected function loadDefault(int $domainId): void
     {
+        $domainDefaultCurrency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+
         $user = $this->userRepository->findUserByEmailAndDomain('no-reply@shopsys.com', $domainId);
         $orderData = $this->orderDataFactory->create();
         $orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
@@ -119,7 +121,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
@@ -144,7 +146,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
         $this->createOrder(
@@ -172,7 +174,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
@@ -197,7 +199,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
@@ -221,7 +223,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::SUPERADMINISTRATOR);
         $this->createOrder(
@@ -248,7 +250,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
@@ -277,7 +279,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
@@ -302,7 +304,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::SUPERADMINISTRATOR);
         $this->createOrder(
@@ -328,7 +330,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
@@ -352,7 +354,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
@@ -375,7 +377,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
@@ -400,7 +402,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
@@ -424,7 +426,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
         $this->createOrder(
@@ -449,7 +451,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
@@ -475,7 +477,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA);
         $orderData->deliveryAddressSameAsBillingAddress = true;
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
@@ -503,7 +505,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->companyNumber = '555555';
         $orderData->note = 'Doufám, že vše dorazí v pořádku a co nejdříve :)';
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
@@ -541,7 +543,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->companyNumber = '555555';
         $orderData->note = 'Doufám, že vše dorazí v pořádku a co nejdříve :)';
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $orderData->createdAsAdministrator = $this->getReference(AdministratorDataFixture::ADMINISTRATOR);
         $this->createOrder(
@@ -581,7 +583,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->companyNumber = '555555';
         $orderData->note = 'Doufám, že vše dorazí v pořádku a co nejdříve :)';
         $orderData->domainId = $domainId;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-2 week', 'now');
         $this->createOrder(
             $orderData,
@@ -596,8 +598,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         );
     }
 
-    protected function loadForSecondDomain()
+    /**
+     * @param int $domainId
+     */
+    protected function loadDistinct(int $domainId)
     {
+        $domainDefaultCurrency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+
         $orderData = $this->orderDataFactory->create();
         $orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_CZECH_POST);
         $orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH_ON_DELIVERY);
@@ -611,8 +618,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->postcode = '71200';
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = true;
-        $orderData->domainId = 2;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId(2);
+        $orderData->domainId = $domainId;
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
         $this->createOrder(
             $orderData,
@@ -621,7 +628,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
             ]
         );
 
-        $user = $this->userRepository->findUserByEmailAndDomain('no-reply.2@shopsys.com', 2);
+        $user = $this->userRepository->findUserByEmailAndDomain('no-reply.2@shopsys.com', $domainId);
         $orderData = $this->orderDataFactory->create();
         $orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
         $orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
@@ -647,8 +654,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->deliveryPostcode = '54321';
         $orderData->deliveryCountry = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA);
         $orderData->note = 'Prosím o dodání do pátku. Děkuji.';
-        $orderData->domainId = 2;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId(2);
+        $orderData->domainId = $domainId;
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
         $this->createOrder(
             $orderData,
@@ -659,7 +666,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
             $user
         );
 
-        $user = $this->userRepository->findUserByEmailAndDomain('no-reply.7@shopsys.com', 2);
+        $user = $this->userRepository->findUserByEmailAndDomain('no-reply.7@shopsys.com', $domainId);
         $orderData = $this->orderDataFactory->create();
         $orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_CZECH_POST);
         $orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH_ON_DELIVERY);
@@ -673,8 +680,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->postcode = '65421';
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = true;
-        $orderData->domainId = 2;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId(2);
+        $orderData->domainId = $domainId;
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
         $this->createOrder(
             $orderData,
@@ -698,8 +705,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
         $orderData->postcode = '71201';
         $orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC);
         $orderData->deliveryAddressSameAsBillingAddress = true;
-        $orderData->domainId = 2;
-        $orderData->currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId(2);
+        $orderData->domainId = $domainId;
+        $orderData->currency = $domainDefaultCurrency;
         $orderData->createdAt = $this->faker->dateTimeBetween('-1 week', 'now');
         $this->createOrder(
             $orderData,
