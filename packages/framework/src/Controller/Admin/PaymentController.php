@@ -118,8 +118,8 @@ class PaymentController extends AdminBaseController
                 t(
                     'Payment <strong><a href="%url%">%name%</a></strong> modified',
                     [
-                        '%name%' => $payment->getName(),
                         '%url%' => $this->generateUrl('admin_payment_edit', ['id' => $payment->getId()]),
+                        '%name%' => $payment->getName(),
                     ]
                 )
             );
