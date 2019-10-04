@@ -42,22 +42,20 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture implements 
         foreach ($this->domain->getAll() as $domainConfig) {
             $domainId = $domainConfig->getId();
             if ($domainId !== 2) {
-                $this->manualBestsellingProductFacade->edit(
-                    $this->getReference(CategoryDataFixture::CATEGORY_PHOTO),
-                    $domainId,
-                    [
-                        0 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '7'),
-                        2 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '8'),
-                        8 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '5'),
-                    ]
-                );
+                $productsIndexedByPosition = [
+                    0 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '7'),
+                    2 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '8'),
+                    8 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '5'),
+                ];
+
             } else {
-                $this->manualBestsellingProductFacade->edit(
-                    $this->getReference(CategoryDataFixture::CATEGORY_PHOTO),
-                    $domainId,
-                    [$this->getReference(ProductDataFixture::PRODUCT_PREFIX . '7')]
-                );
+                $productsIndexedByPosition = [$this->getReference(ProductDataFixture::PRODUCT_PREFIX . '7')];
             }
+            $this->manualBestsellingProductFacade->edit(
+                $this->getReference(CategoryDataFixture::CATEGORY_PHOTO),
+                $domainId,
+                $productsIndexedByPosition
+            );
         }
     }
 
