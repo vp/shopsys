@@ -24,18 +24,12 @@ use Tests\ShopBundle\Test\TransactionFunctionalTestCase;
 abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTestCase
 {
     /**
-     * @var \Shopsys\FrameworkBundle\Component\Domain\Domain
-     */
-    protected $domain;
-
-    /**
      * @var \Shopsys\FrameworkBundle\Model\Pricing\PriceConverter
      */
     protected $priceConverter;
 
     protected function setUp()
     {
-        $this->domain = $this->getContainer()->get(Domain::class);
         $this->priceConverter = $this->getContainer()->get(PriceConverter::class);
         parent::setUp();
     }
@@ -133,7 +127,7 @@ abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTes
     {
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
-        $firstDomainLocale = $this->domain->getDomainConfigById(1)->getLocale();
+        $firstDomainLocale = $this->getFirstDomainLocale();
         $parameterFilterData = $this->createParameterFilterData(
             [$firstDomainLocale => t('Print resolution', [], 'dataFixtures', $firstDomainLocale)],
             [[$firstDomainLocale => t('4800x1200', [], 'dataFixtures', $firstDomainLocale)]]
@@ -151,7 +145,7 @@ abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTes
     {
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
-        $firstDomainLocale = $this->domain->getDomainConfigById(1)->getLocale();
+        $firstDomainLocale = $this->getFirstDomainLocale();
         $parameterFilterData = $this->createParameterFilterData(
             [$firstDomainLocale => t('Print resolution', [], 'dataFixtures', $firstDomainLocale)],
             [
@@ -170,7 +164,7 @@ abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTes
     {
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
-        $firstDomainLocale = $this->domain->getDomainConfigById(1)->getLocale();
+        $firstDomainLocale = $this->getFirstDomainLocale();
         $parameterFilterData1 = $this->createParameterFilterData(
             [$firstDomainLocale => t('Print resolution', [], 'dataFixtures', $firstDomainLocale)],
             [
@@ -194,7 +188,7 @@ abstract class ProductOnCurrentDomainFacadeTest extends TransactionFunctionalTes
     {
         $category = $this->getReference(CategoryDataFixture::CATEGORY_PRINTERS);
 
-        $firstDomainLocale = $this->domain->getDomainConfigById(1)->getLocale();
+        $firstDomainLocale = $this->getFirstDomainLocale();
         $parameterFilterData1 = $this->createParameterFilterData(
             [$firstDomainLocale => t('Print resolution', [], 'dataFixtures', $firstDomainLocale)],
             [[$firstDomainLocale => t('2400x600', [], 'dataFixtures', $firstDomainLocale)]]
