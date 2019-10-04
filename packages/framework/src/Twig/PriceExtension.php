@@ -263,7 +263,8 @@ class PriceExtension extends Twig_Extension
     }
 
     /**
-     * @deprecated - use {@see \Shopsys\FrameworkBundle\Component\CurrencyFormatter\CurrencyFormatterFactory} instead
+     * @deprecated
+     * use create() method of {@see \Shopsys\FrameworkBundle\Component\CurrencyFormatter\CurrencyFormatterFactory} instead
      * @param string $locale
      * @return \CommerceGuys\Intl\Formatter\CurrencyFormatter
      */
