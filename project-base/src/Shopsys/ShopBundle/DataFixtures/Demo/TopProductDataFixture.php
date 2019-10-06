@@ -37,22 +37,22 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
      */
     public function load(ObjectManager $manager)
     {
-        $topProductReferenceNamesOnAllDomainsExcludingSecond = [
+        $defaultTopProductReferenceNames = [
             ProductDataFixture::PRODUCT_PREFIX . '1',
             ProductDataFixture::PRODUCT_PREFIX . '17',
             ProductDataFixture::PRODUCT_PREFIX . '9',
         ];
-        $topProductReferenceNamesOnSecondDomain = [
+        $distinctTopProductReferenceNames = [
             ProductDataFixture::PRODUCT_PREFIX . '14',
             ProductDataFixture::PRODUCT_PREFIX . '10',
             ProductDataFixture::PRODUCT_PREFIX . '7',
         ];
         foreach ($this->domain->getAll() as $domainConfig) {
             $domainId = $domainConfig->getId();
-            if ($domainId !== 2) {
-                $this->createTopProductsForDomain($topProductReferenceNamesOnAllDomainsExcludingSecond, $domainId);
+            if ($domainId === 2) {
+                $this->createTopProductsForDomain($distinctTopProductReferenceNames, $domainId);
             } else {
-                $this->createTopProductsForDomain($topProductReferenceNamesOnSecondDomain, $domainId);
+                $this->createTopProductsForDomain($defaultTopProductReferenceNames, $domainId);
             }
         }
     }
