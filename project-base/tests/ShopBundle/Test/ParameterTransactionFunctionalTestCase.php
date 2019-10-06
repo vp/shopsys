@@ -13,7 +13,7 @@ class ParameterTransactionFunctionalTestCase extends TransactionFunctionalTestCa
      * @param string $parameterValueNameId
      * @return int
      */
-    protected function getParameterValueId(string $parameterValueNameId): int
+    protected function getParameterValueIdForFirstDomain(string $parameterValueNameId): int
     {
         /** @var \Shopsys\FrameworkBundle\Component\Domain\Domain $domain */
         $domain = $this->getContainer()->get(Domain::class);

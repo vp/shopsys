@@ -74,7 +74,7 @@ class FilterQueryTest extends ParameterTransactionFunctionalTestCase
     {
         $this->skipTestIfFirstDomainIsNotInEnglish();
 
-        $parameters = [51 => [$this->getParameterValueId('hardcover'), $this->getParameterValueId('paper')], 50 => [$this->getParameterValueId('55'), $this->getParameterValueId('48')], 10 => [$this->getParameterValueId('50 g')]];
+        $parameters = [51 => [$this->getParameterValueIdForFirstDomain('hardcover'), $this->getParameterValueIdForFirstDomain('paper')], 50 => [$this->getParameterValueIdForFirstDomain('55'), $this->getParameterValueIdForFirstDomain('48')], 10 => [$this->getParameterValueIdForFirstDomain('50 g')]];
 
         $filter = $this->createFilter()
             ->filterByParameters($parameters);
