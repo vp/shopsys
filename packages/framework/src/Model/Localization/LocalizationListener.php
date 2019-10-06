@@ -2,6 +2,7 @@
 
 namespace Shopsys\FrameworkBundle\Model\Localization;
 
+use BadMethodCallException;
 use Shopsys\FrameworkBundle\Component\Domain\Domain;
 use Shopsys\FrameworkBundle\Model\Administration\AdministrationFacade;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -33,12 +34,26 @@ class LocalizationListener implements EventSubscriberInterface
      */
     public function __construct(
         Domain $domain,
-        Localization $localization,
-        AdministrationFacade $administrationFacade
+        Localization $localization
     ) {
         $this->domain = $domain;
         $this->localization = $localization;
-        $this->administrationFacade = $administrationFacade;
+    }
+
+    /**
+     * @required
+     * @internal This function will be replaced by constructor injection in next major
+     * @param \Shopsys\FrameworkBundle\Model\Administration\AdministrationFacade $administrationFacade
+     */
+    public function setAdministrationFacade(AdministrationFacade $administrationFacade)
+    {
+        if ($this->administrationFacade !== null && $this->administrationFacade !== $administrationFacade) {
+            throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
+        }
+        if ($this->administrationFacade === null) {
+            @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
+            $this->administrationFacade = $administrationFacade;
+        }
     }
 
     /**
