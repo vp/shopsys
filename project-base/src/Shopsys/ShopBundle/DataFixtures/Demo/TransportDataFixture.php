@@ -90,7 +90,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             $transportData->name[$locale] = t('PPL', [], 'dataFixtures', $locale);
         }
 
-        $this->setPriceForAllCurrencies($transportData, Money::create('199.95'));
+        $this->setPriceForAllDomainDefaultCurrencies($transportData, Money::create('199.95'));
 
         $transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createTransport(self::TRANSPORT_PPL, $transportData);
@@ -101,7 +101,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             $transportData->name[$locale] = t('Personal collection', [], 'dataFixtures', $locale);
         }
 
-        $this->setPriceForAllCurrencies($transportData, Money::zero());
+        $this->setPriceForAllDomainDefaultCurrencies($transportData, Money::zero());
 
         foreach ($this->domain->getAllLocales() as $locale) {
             $transportData->description[$locale] = t('You will be welcomed by friendly staff!', [], 'dataFixtures', $locale);
@@ -129,7 +129,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
      * @param \Shopsys\ShopBundle\Model\Transport\TransportData $transportData
      * @param \Shopsys\FrameworkBundle\Component\Money\Money $price
      */
-    protected function setPriceForAllCurrencies(TransportData $transportData, Money $price): void
+    protected function setPriceForAllDomainDefaultCurrencies(TransportData $transportData, Money $price): void
     {
         foreach ($this->domain->getAllIncludingDomainConfigsWithoutDataCreated() as $domain) {
             $currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domain->getId());
