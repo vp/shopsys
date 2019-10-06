@@ -121,4 +121,12 @@ abstract class FunctionalTestCase extends WebTestCase
     {
         return $this->domain->getLocale();
     }
+
+    /**
+     * @return \Shopsys\FrameworkBundle\Component\Domain\Domain
+     */
+    protected function getDomain(): Domain
+    {
+        return $this->domain;
+    }
 }

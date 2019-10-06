@@ -17,18 +17,12 @@ class BackendApiDeleteProductTest extends OauthTestCase
 {
     public function testDeleteProductSuccess(): void
     {
-        /** @var \Shopsys\FrameworkBundle\Component\Domain\Domain $domain */
-        $domain = $this->getContainer()->get(Domain::class);
-        $namesByLocale = [];
-        $shortDescriptionsByDomainId = [];
-        $longDescriptionsByDomainId = [];
-        foreach ($domain->getAll() as $domainConfig) {
-            $namesByLocale[$domainConfig->getLocale()] = 'Name';
-            $shortDescriptionsByDomainId[$domainConfig->getId()] = 'Short description';
-            $longDescriptionsByDomainId[$domainConfig->getId()] = 'Long description';
-        }
+        $multiValues = $this->getProductMultiValuesForAllDomainsIndexedByAttributeName([
+            'name' => 'Name',
+            'shortDescription' => 'Short description',
+            'longDescription' => 'Long description',
+        ]);
         $product = [
-            'name' => $namesByLocale,
             'hidden' => true,
             'sellingDenied' => true,
             'sellingFrom' => '2019-07-16T00:00:00+00:00',
@@ -36,10 +30,8 @@ class BackendApiDeleteProductTest extends OauthTestCase
             'catnum' => '123456 co',
             'ean' => 'E12346B',
             'partno' => 'P123456',
-            'shortDescription' => $shortDescriptionsByDomainId,
-            'longDescription' => $longDescriptionsByDomainId,
         ];
-        $createResponse = $this->runOauthRequest('POST', '/api/v1/products', $product);
+        $createResponse = $this->runOauthRequest('POST', '/api/v1/products', array_merge($product, $multiValues));
 
         $location = $createResponse->headers->get('Location');
         $uuid = $this->extractUuid($location);

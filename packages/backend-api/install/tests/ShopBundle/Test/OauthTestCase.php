@@ -121,4 +121,21 @@ class OauthTestCase extends FunctionalTestCase
         Assert::uuid($uuid);
         return $uuid;
     }
+
+    /**
+     * @param array $valuesIndexedByAttributeName
+     * @return array
+     */
+    protected function getProductMultiValuesForAllDomainsIndexedByAttributeName(array $valuesIndexedByAttributeName): array
+    {
+        $multiValuesForAllDomains = [];
+        foreach ($valuesIndexedByAttributeName as $attributeName => $translation) {
+            foreach ($this->getDomain()->getAll() as $domainConfig) {
+                $key = $attributeName === 'name' ? $domainConfig->getLocale() : $domainConfig->getId();
+                $multiValuesForAllDomains[$attributeName][$key] = $translation;
+            }
+        }
+
+        return $multiValuesForAllDomains;
+    }
 }
