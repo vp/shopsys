@@ -6044,7 +6044,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
     /**
      * @return array
      */
-    public static function getProductsRelations(): array
+    public static function getVariantCatnumsByMainVariantCatnum(): array
     {
         return [
             '9176544M' => [
@@ -6064,7 +6064,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 
     protected function createVariants(): void
     {
-        $variantCatnumsByMainVariantCatnum = $this->getProductsRelations();
+        $variantCatnumsByMainVariantCatnum = $this->getVariantCatnumsByMainVariantCatnum();
 
         foreach ($variantCatnumsByMainVariantCatnum as $mainVariantCatnum => $variantsCatnums) {
             /** @var \Shopsys\ShopBundle\Model\Product\Product $mainProduct */

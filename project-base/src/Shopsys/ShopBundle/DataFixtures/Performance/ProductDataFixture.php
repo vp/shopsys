@@ -161,7 +161,7 @@ class ProductDataFixture
 
         $this->cleanAndLoadReferences();
 
-        $variantCatnumsByMainVariantCatnum = DemoProductDataFixture::getProductsRelations();
+        $variantCatnumsByMainVariantCatnum = DemoProductDataFixture::getVariantCatnumsByMainVariantCatnum();
 
         $progressBar = $this->progressBarFactory->create($output, $this->productTotalCount);
 
