@@ -10,8 +10,8 @@ use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
 
 class CurrencyFormatterFactory
 {
-    protected const MINIMUM_FRACTION_DIGITS = 2;
-    protected const MAXIMUM_FRACTION_DIGITS = 10;
+    public const MINIMUM_FRACTION_DIGITS = 2;
+    public const MAXIMUM_FRACTION_DIGITS = 10;
 
     /**
      * @var \CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface
