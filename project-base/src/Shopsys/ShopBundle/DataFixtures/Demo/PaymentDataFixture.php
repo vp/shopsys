@@ -78,7 +78,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
             $paymentData->instructions[$locale] = t('<b>You have chosen payment by credit card. Please finish it in two business days.</b>', [], 'dataFixtures', $locale);
         }
 
-        $this->setPriceForAllCurrencies($paymentData, Money::create('99.95'));
+        $this->setPriceForAllDomainDefaultCurrencies($paymentData, Money::create('99.95'));
 
         $paymentData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
         $this->createPayment(self::PAYMENT_CARD, $paymentData, [
@@ -92,7 +92,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
             $paymentData->name[$locale] = t('Cash on delivery', [], 'dataFixtures', $locale);
         }
 
-        $this->setPriceForAllCurrencies($paymentData, Money::create('49.90'));
+        $this->setPriceForAllDomainDefaultCurrencies($paymentData, Money::create('49.90'));
 
         $paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createPayment(self::PAYMENT_CASH_ON_DELIVERY, $paymentData, [TransportDataFixture::TRANSPORT_CZECH_POST]);
@@ -105,7 +105,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 
         $paymentData->czkRounding = true;
 
-        $this->setPriceForAllCurrencies($paymentData, Money::zero());
+        $this->setPriceForAllDomainDefaultCurrencies($paymentData, Money::zero());
 
         $paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
         $this->createPayment(self::PAYMENT_CASH, $paymentData, [TransportDataFixture::TRANSPORT_PERSONAL]);
@@ -149,7 +149,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
      * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
      * @param \Shopsys\FrameworkBundle\Component\Money\Money $price
      */
-    protected function setPriceForAllCurrencies(PaymentData $paymentData, Money $price): void
+    protected function setPriceForAllDomainDefaultCurrencies(PaymentData $paymentData, Money $price): void
     {
         foreach ($this->domain->getAllIncludingDomainConfigsWithoutDataCreated() as $domain) {
             $currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domain->getId());
