@@ -67,7 +67,7 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
 
             $pricingGroupData = $this->pricingGroupDataFactory->create();
 
-            $this->editDefaultPricingGroupOnDomain($domainConfig, $pricingGroupData);
+            $this->editDefaultPricingGroupOnDomain($domainConfig);
 
             if ($domainId !== 2) {
                 $pricingGroupData->name = t('Partner', [], 'dataFixtures', $locale);
@@ -103,12 +103,12 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
      * @see \Shopsys\FrameworkBundle\Component\Domain\DomainDataCreator
      *
      * @param \Shopsys\FrameworkBundle\Component\Domain\Config\DomainConfig $domainConfig
-     * @param \Shopsys\FrameworkBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
      */
-    protected function editDefaultPricingGroupOnDomain(DomainConfig $domainConfig, PricingGroupData $pricingGroupData): void
+    protected function editDefaultPricingGroupOnDomain(DomainConfig $domainConfig): void
     {
-        $pricingGroupData->name = t('Ordinary customer', [], 'dataFixtures', $domainConfig->getLocale());
         $defaultPricingGroupOnDomain = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
+        $pricingGroupData = $this->pricingGroupDataFactory->createFromPricingGroup($defaultPricingGroupOnDomain);
+        $pricingGroupData->name = t('Ordinary customer', [], 'dataFixtures', $domainConfig->getLocale());
         $this->pricingGroupFacade->edit($defaultPricingGroupOnDomain->getId(), $pricingGroupData);
         $this->addReferenceForDomain(self::PRICING_GROUP_ORDINARY, $defaultPricingGroupOnDomain, $domainConfig->getId());
     }
