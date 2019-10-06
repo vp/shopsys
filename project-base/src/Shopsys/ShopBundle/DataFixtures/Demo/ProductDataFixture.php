@@ -6095,10 +6095,9 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
         $parameter = $this->parameterFacade->findParameterByNames($parameterNamesByLocale);
 
         if ($parameter === null) {
-            $visible = true;
             $parameterData = $this->parameterDataFactory->create();
             $parameterData->name = $parameterNamesByLocale;
-            $parameterData->visible = $visible;
+            $parameterData->visible = true;
             $parameter = $this->parameterFacade->create($parameterData);
         }
 
@@ -6178,10 +6177,8 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      */
     protected function setFlags(ProductData $productData, array $flagReferences): void
     {
-        if (count($flagReferences) > 0) {
-            foreach ($flagReferences as $flagReference) {
-                $productData->flags[] = $this->persistentReferenceFacade->getReference($flagReference);
-            }
+        foreach ($flagReferences as $flagReference) {
+            $productData->flags[] = $this->persistentReferenceFacade->getReference($flagReference);
         }
     }
 
