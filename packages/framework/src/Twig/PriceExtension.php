@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Shopsys\FrameworkBundle\Twig;
 
+use BadMethodCallException;
 use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
 use CommerceGuys\Intl\Formatter\CurrencyFormatter;
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
@@ -67,22 +68,35 @@ class PriceExtension extends Twig_Extension
      * @param \Shopsys\FrameworkBundle\Model\Localization\Localization $localization
      * @param \CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface $numberFormatRepository
      * @param \CommerceGuys\Intl\Currency\CurrencyRepositoryInterface $intlCurrencyRepository
-     * @param \Shopsys\FrameworkBundle\Component\CurrencyFormatter\CurrencyFormatterFactory $currencyFormatterFactory
      */
     public function __construct(
         CurrencyFacade $currencyFacade,
         Domain $domain,
         Localization $localization,
         NumberFormatRepositoryInterface $numberFormatRepository,
-        CurrencyRepositoryInterface $intlCurrencyRepository,
-        CurrencyFormatterFactory $currencyFormatterFactory
+        CurrencyRepositoryInterface $intlCurrencyRepository
     ) {
         $this->currencyFacade = $currencyFacade;
         $this->domain = $domain;
         $this->localization = $localization;
         $this->numberFormatRepository = $numberFormatRepository;
         $this->intlCurrencyRepository = $intlCurrencyRepository;
-        $this->currencyFormatterFactory = $currencyFormatterFactory;
+    }
+
+    /**
+     * @required
+     * @internal This function will be replaced by constructor injection in next major
+     * @param \Shopsys\FrameworkBundle\Component\CurrencyFormatter\CurrencyFormatterFactory $currencyFormatterFactory
+     */
+    public function setCurrencyFormatterFactory(CurrencyFormatterFactory $currencyFormatterFactory)
+    {
+        if ($this->currencyFormatterFactory !== null && $this->currencyFormatterFactory !== $currencyFormatterFactory) {
+            throw new BadMethodCallException(sprintf('Method "%s" has been already called and cannot be called multiple times.', __METHOD__));
+        }
+        if ($this->currencyFormatterFactory === null) {
+            @trigger_error(sprintf('The %s() method is deprecated and will be removed in the next major. Use the constructor injection instead.', __METHOD__), E_USER_DEPRECATED);
+            $this->currencyFormatterFactory = $currencyFormatterFactory;
+        }
     }
 
     /**
