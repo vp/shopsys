@@ -13,7 +13,7 @@ class CartBoxPage extends AbstractPage
      * @param int $expectedCount
      * @param string $expectedPrice
      */
-    public function seeInCartBox(int $expectedCount, string $expectedPrice): void
+    public function seeCountAndPriceInCartBox(int $expectedCount, string $expectedPrice): void
     {
         $convertedPrice = Money::create($this->tester->getPriceWithVatConvertedToDomainDefaultCurrency($expectedPrice));
         $expectedFormattedPriceWithCurrency = $this->tester->getFormattedPriceWithCurrencySymbolOnFrontend($convertedPrice);
