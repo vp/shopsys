@@ -99,17 +99,11 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 
         foreach ($this->domain->getAllLocales() as $locale) {
             $transportData->name[$locale] = t('Personal collection', [], 'dataFixtures', $locale);
+            $transportData->description[$locale] = t('You will be welcomed by friendly staff!', [], 'dataFixtures', $locale);
+            $transportData->instructions[$locale] = t('We are looking forward to your visit.', [], 'dataFixtures', $locale);
         }
 
         $this->setPriceForAllDomainDefaultCurrencies($transportData, Money::zero());
-
-        foreach ($this->domain->getAllLocales() as $locale) {
-            $transportData->description[$locale] = t('You will be welcomed by friendly staff!', [], 'dataFixtures', $locale);
-        }
-
-        foreach ($this->domain->getAllLocales() as $locale) {
-            $transportData->instructions[$locale] = t('We are looking forward to your visit.', [], 'dataFixtures', $locale);
-        }
 
         $transportData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
         $this->createTransport(self::TRANSPORT_PERSONAL, $transportData);
