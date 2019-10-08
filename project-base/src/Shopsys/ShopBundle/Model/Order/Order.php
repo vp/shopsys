@@ -13,7 +13,7 @@ use Shopsys\FrameworkBundle\Model\Order\OrderEditResult;
 /**
  * @ORM\Table(name="orders")
  * @ORM\Entity
- * @property \Shopsys\ShopBundle\Model\Customer\User|null $customer
+ * @property \Shopsys\ShopBundle\Model\Customer\User|null $user
  * @property \Shopsys\ShopBundle\Model\Order\Item\OrderItem[]|\Doctrine\Common\Collections\Collection $items
  * @property \Shopsys\ShopBundle\Model\Transport\Transport $transport
  * @property \Shopsys\ShopBundle\Model\Payment\Payment $payment
@@ -22,7 +22,7 @@ use Shopsys\FrameworkBundle\Model\Order\OrderEditResult;
  * @method \Shopsys\ShopBundle\Model\Order\Item\OrderItem getOrderPayment()
  * @method \Shopsys\ShopBundle\Model\Transport\Transport getTransport()
  * @method \Shopsys\ShopBundle\Model\Order\Item\OrderItem getOrderTransport()
- * @method \Shopsys\ShopBundle\Model\Customer\User|null getCustomer()
+ * @method \Shopsys\ShopBundle\Model\Customer\User|null getUser()
  * @method \Shopsys\ShopBundle\Model\Order\Item\OrderItem[] getItems()
  * @method \Shopsys\ShopBundle\Model\Order\Item\OrderItem[] getItemsWithoutTransportAndPayment()
  * @method \Shopsys\ShopBundle\Model\Order\Item\OrderItem[] getTransportAndPaymentItems()
