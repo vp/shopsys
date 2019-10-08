@@ -371,6 +371,8 @@ There you can find links to upgrade notes for other versions too.
         +        Assert::assertNotSame($errorIdFirstAccess, $errorIdSecondAccess);
         +    }
         ```
+- improve your data fixtures and tests so they are more resistant against domains and locales settings changes [#1425](https://github.com/shopsys/shopsys/pull/1425)
+    - for detailed information, see [the separate article](upgrade-instructions-for-improved-data-fixtures-and-tests.md)
 
 ## Configuration
 - use DIC configuration instead of `RedisCacheFactory` to create redis caches ([#1361](https://github.com/shopsys/shopsys/pull/1361))
