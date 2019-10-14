@@ -75,6 +75,8 @@
 * [Configuring Image Sizes for Individual Devices Width](./frontend/configuring-image-sizes-for-individual-devices-width.md)
 * [Frontend Troubleshooting](./frontend/frontend-troubleshooting.md)
 * [Understanding the Style Directory](./frontend/understanding-the-style-directory.md)
+* [Basic design styleguide](./frontend/styleguide.md)
+
 
 ## Orchestration
 * [Introduction to Kubernetes](/docs/kubernetes/introduction-to-kubernetes.md)
